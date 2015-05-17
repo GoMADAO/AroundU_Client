@@ -1,6 +1,6 @@
 package util;
 
-public final class Global {
+public final class Helper {
 	
 	public static String USERID;
 	public static String USERNAME;
