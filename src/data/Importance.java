@@ -1,5 +1,7 @@
 package data;
 
+import util.Helper;
+
 public class Importance extends EventMSG{
 
 	public Importance(String id, String text, String lat, String lng,
@@ -10,5 +12,10 @@ public class Importance extends EventMSG{
 	}
 	public String abstr;
 	public String reportNUM;
+	@Override
+	protected int getType() {
+		// TODO Auto-generated method stub
+		return Helper.IMPORTANCE;
+	}
 
 }

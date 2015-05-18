@@ -1,5 +1,7 @@
 package data;
 
+import util.Helper;
+
 public class Normal extends EventMSG{
 	public Normal(String id, String text, String lat, String lng, 
 			String timestamp, String topic, String likes ) {
@@ -9,5 +11,10 @@ public class Normal extends EventMSG{
 	}
 	public String topic;
 	public String likeNum;
+	@Override
+	protected int getType() {
+		// TODO Auto-generated method stub
+		return Helper.NORMAL;
+	}
 	
 }
