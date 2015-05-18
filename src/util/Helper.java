@@ -9,7 +9,12 @@ public final class Helper {
 	public static boolean isBLOCK = false;
 	public static boolean isActive = true;
 
-	public static String IP="160.39.175.67";
+	public static String IP="129.236.235.212";
+	
+	
+	public static final int NORMAL = 0;
+	public static final int EMERGENCY = 2;
+	public static final int IMPORTANCE = 1;
 	
 	
 	public static float getRange(){
