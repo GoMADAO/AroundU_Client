@@ -10,4 +10,6 @@ public class Server4Emer extends Server{
 	public void report(){
 		
 	}
+	
+	
 }

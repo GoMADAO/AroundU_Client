@@ -1,9 +1,11 @@
 package com.example.aroundu_client;
 
 import util.Helper;
+import util.Server;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
+	  
+	  
+	  StrictMode.ThreadPolicy policy = new StrictMode.
+			  ThreadPolicy.Builder().permitAll().build();
+			  StrictMode.setThreadPolicy(policy); 
+	  
+	  
 	  setContentView(R.layout.activity_main);
 	  System.out.println(Helper.getRange());
 	  Button login = (Button) findViewById(R.id.btn);
@@ -37,6 +46,8 @@ public class MainActivity extends Activity {
 		 *  facebook login
 		 */
 		
+		Server server = new Server();
+		server.select();
 		
 		
 		startActivity(intent);
