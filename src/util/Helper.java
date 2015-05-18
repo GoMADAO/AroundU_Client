@@ -1,5 +1,7 @@
 package util;
 
+import data.Normal;
+
 public final class Helper {
 	
 	public static String USERID;
@@ -7,7 +9,8 @@ public final class Helper {
 	public static String PATH;
 	public static int range = 10;
 	public static boolean isBLOCK = false;
-	public static boolean isActive = true;
+	public static boolean isACTIVE = true;
+
 
 	public static String IP="129.236.235.212";
 	
@@ -16,6 +19,7 @@ public final class Helper {
 	public static final int EMERGENCY = 2;
 	public static final int IMPORTANCE = 1;
 	
+
 	
 	public static float getRange(){
 		return (float)range/1000;
