@@ -47,7 +47,9 @@ public class MainActivity extends Activity {
 		 */
 		
 		Server server = new Server();
-		server.select();
+		String result = server.select();
+		if(result!=null)
+			System.out.println(result);
 		
 		
 		startActivity(intent);
