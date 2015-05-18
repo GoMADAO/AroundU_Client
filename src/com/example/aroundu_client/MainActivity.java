@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		 */
 		
 		Server server = new Server();
-		String result = server.select();
+		String result = server.select("40.8438597", "-73.9365103,14");
 		if(result!=null)
 			System.out.println(result);
 		

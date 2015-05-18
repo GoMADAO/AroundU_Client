@@ -8,6 +8,9 @@ public final class Helper {
 	public static int range = 10;
 	public static boolean BLOCK = false;
 
+	public static String IP="192.168.0.11";
+	
+	
 	public static float getRange(){
 		return (float)range/1000;
 	}

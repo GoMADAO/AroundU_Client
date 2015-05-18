@@ -8,6 +8,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.HttpURLConnection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 
 
 
@@ -21,31 +25,41 @@ public class Server {
 		
 	}
 	
-	public void run(){
-		select();
-	}
-	
-	public String select(){
-		String url = "http://129.236.235.212:8080/finalproj/read";
+	public String select(String lati, String longi){
+		
+		JSONObject json = new JSONObject();
+		try {
+			json.put("range", Helper.getRange());
+			json.put("lon", longi);
+			json.put("lat", lati);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		StringBuffer url =  new StringBuffer("http://");
+		url.append(Helper.IP).append(":8080/finalproj/read?data=");
+		url.append(json.toString());
+		
+		
+		System.out.println(url.toString());
+		
 		URL obj ;
 		String result=null;
 		HttpURLConnection con = null;
 		try {
-			obj = new URL(url);
+			
+			obj = new URL(url.toString());
 			 con =  (HttpURLConnection) obj.openConnection();
-			
-			
 			int responseCode = con.getResponseCode();
+			
 			System.out.println(responseCode);
 			result =convertStreamToString( con.getInputStream());
 			
 			
-			
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			con.disconnect();
@@ -69,13 +83,15 @@ public class Server {
 		String line = null;
 		try {
 		    while ((line = reader.readLine()) != null) {
-		        sb.append(line + "\n");
+		        sb.append(line).append("\n");
 		    }
+		    
 		} catch (IOException e) {
 		    e.printStackTrace();
 		} finally {
 		    try {
 		        is.close();
+		        reader.close();
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
