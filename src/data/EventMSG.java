@@ -1,6 +1,6 @@
 package data;
 
-public class EventMSG {
+public abstract class EventMSG {
 	public String id;
 	public String text;
 	public String lat, lng;
