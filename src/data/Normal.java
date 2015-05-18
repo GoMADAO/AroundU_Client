@@ -2,13 +2,12 @@ package data;
 
 public class Normal extends EventMSG{
 	public Normal(String id, String text, String lat, String lng, 
-			String timestamp, String topic) {
+			String timestamp, String topic, String likes ) {
 		super( id,  text,  lat,  lng,  timestamp);
-		// TODO Auto-generated constructor stub
 		this.topic = topic;
+		this.likeNum = likes;
 	}
 	public String topic;
-	public String total_likes;
+	public String likeNum;
 	
-
 }
