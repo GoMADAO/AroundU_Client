@@ -15,6 +15,19 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView 
+            android:id="@+id/feedList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+        
+    </LinearLayout>
 
     <!--
          android:layout_gravity="start" tells DrawerLayout to treat
