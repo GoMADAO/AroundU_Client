@@ -15,7 +15,7 @@ public class Importance extends EventMSG{
 	public String abstr;
 	public String reportNUM;
 	@Override
-	protected int getType() {
+	public int getType() {
 		// TODO Auto-generated method stub
 		return Helper.IMPORTANCE;
 	}

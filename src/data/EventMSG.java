@@ -17,5 +17,5 @@ public abstract class EventMSG {
 		this.timestamp = json.getString("time");
 	}
 	
-	protected abstract int getType();
+	public abstract int getType();
 }
