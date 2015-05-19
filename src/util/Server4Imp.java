@@ -32,7 +32,19 @@ JSONObject json = new JSONObject();
 		callGet(json, service);
 	}
 	
-	public void report(){
-		
+	public void report(EventMSG msg){
+		Importance i = (Importance)msg;
+		JSONObject json = new JSONObject();
+		try {
+			JSONObject inner = new JSONObject();
+			inner.put("type", "normal");
+			inner.put("id", i.id);
+			json.put("MSG", inner);
+			json.put("OP", "like");
+			
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }
