@@ -103,6 +103,7 @@ public class FeedsActivity extends Activity implements
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
 		server = new Server();
+		
 		//server.select("40.8438597", "-73.9365103,14");
 		try {
 			JSONObject json = new JSONObject(server.select("40.8438597", "-73.9365103,14"));
