@@ -1,18 +1,15 @@
 package util;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.HttpURLConnection;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import data.EventMSG;
 
 
 
@@ -24,7 +21,7 @@ import org.json.JSONObject;
 public class Server {
 	
 	
-	public void insert(){
+	public void insert(EventMSG msg,String lati, String longi){
 		
 	}
 	
@@ -39,23 +36,28 @@ public class Server {
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
+
+		String result = callGet( json, "read");
+
+		return result;
+	}
+	
+	protected static String callGet(JSONObject data, String service){
+		String result=null;
+		StringBuffer url =  new StringBuffer();
+		url.append(Helper.IP).append("/").append(service).append("?data=");
+		url.append(data.toString());
 		
-		
-		StringBuffer url =  new StringBuffer("http://");
-		url.append(Helper.IP).append(":8080/finalproj/read?data=");
-		url.append(json.toString());
-		
-		
-		System.out.println(url.toString());
+		System.out.println("URL:"+url.toString());
 		
 		URL obj ;
-		String result=null;
+		int responseCode = 0;
 		HttpURLConnection con = null;
 		try {
 			
 			obj = new URL(url.toString());
 			 con =  (HttpURLConnection) obj.openConnection();
-			int responseCode = con.getResponseCode();
+			 responseCode = con.getResponseCode();
 			
 			System.out.println(responseCode);
 			result =convertStreamToString( con.getInputStream());
@@ -69,10 +71,10 @@ public class Server {
 			con.disconnect();
 		}
 		
-		
-		
 		return result;
+		
 	}
+	
 	
 	protected static String convertStreamToString(InputStream is) throws IOException  {
 		int i;

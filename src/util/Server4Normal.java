@@ -1,17 +1,36 @@
 package util;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import data.EventMSG;
+import data.Normal;
+
 public class Server4Normal extends Server{
 	
+	private String service = "Writer";
+	
 	@Override
-	public void insert(){
+	public void insert(EventMSG msg, String lati, String longi){
+		JSONObject json = new JSONObject();
+		JSONObject inner = new JSONObject();
+		Normal n = (Normal)msg;
+		
+		try {
+			json.put("OP", "insert");
+			inner.put("text", n.text);
+			inner.put("userid", Helper.USERID);
+			inner.put("lat", lati);
+			inner.put("lng", longi);
+			inner.put("type", "normal");
+			json.put("MSG", inner);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		callGet(json, service);
 		
 	}
 	
@@ -28,8 +47,8 @@ public class Server4Normal extends Server{
 			e.printStackTrace();
 		}
 		
-		StringBuffer sb = new StringBuffer();
-		send(sb.toString());
+		
+		callGet(json, service);
 		
 		
 	}
@@ -47,28 +66,8 @@ public class Server4Normal extends Server{
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		StringBuffer sb = new StringBuffer();
-		send(sb.toString());
-		
+		callGet(json, service);
 	}
 	
-	private void send(String url){
-		HttpURLConnection con = null;
-		URL obj ;
-		//String rt = null;
-		try {
-			//TODO url
-			obj = new URL(url);
-			con =  (HttpURLConnection) obj.openConnection();
-			//rt = convertStreamToString(con.getInputStream());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			con.disconnect();
-		}
-		//return rt;
-	}
+	
 }
