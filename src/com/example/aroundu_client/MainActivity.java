@@ -1,7 +1,13 @@
 package com.example.aroundu_client;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import data.EventMSG;
+import data.Normal;
 import util.Helper;
 import util.Server;
+import util.Server4Normal;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +36,12 @@ public class MainActivity extends Activity {
 	  setContentView(R.layout.activity_main);
 	  System.out.println(Helper.getRange());
 	  Button login = (Button) findViewById(R.id.btn);
+	  
+//	  Server server = new Server4Normal();
+//	  EventMSG msg= new Normal("first text", null);
+//	
+//	  server.insert(msg,"40.8438597", "-73.936510314");
+	
 	  login.setOnClickListener(new View.OnClickListener() {
 		
 		@Override
