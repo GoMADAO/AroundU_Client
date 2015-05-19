@@ -60,7 +60,7 @@ public class Server {
 			System.out.println(responseCode);
 			result =convertStreamToString( con.getInputStream());
 			
-			
+			System.out.println(result);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -81,7 +81,7 @@ public class Server {
 			sb.append((char)i);
 		}
 		
-		
+
 	    return sb.toString();
 		
 	}

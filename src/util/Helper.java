@@ -1,6 +1,6 @@
 package util;
 
-import data.Normal;
+
 
 public final class Helper {
 	
