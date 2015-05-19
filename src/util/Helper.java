@@ -18,6 +18,8 @@ public final class Helper {
 	public static final int IMPORTANCE = 1;
 	
 
+	public static double lat = 0.0;
+	public static double lng = 0.0;
 	
 	public static float getRange(){
 		return (float)range/1000;
