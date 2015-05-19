@@ -14,6 +14,7 @@ public class Server4Normal extends Server{
 	
 	@Override
 	public void insert(EventMSG msg, String lati, String longi){
+		System.out.println("right call");
 		JSONObject json = new JSONObject();
 		JSONObject inner = new JSONObject();
 		Normal n = (Normal)msg;
