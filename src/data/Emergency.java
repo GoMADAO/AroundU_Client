@@ -1,5 +1,8 @@
 package data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import util.Helper;
 
 public class Emergency extends EventMSG{
@@ -7,11 +10,13 @@ public class Emergency extends EventMSG{
 	public String reportNUM;
 	public boolean mapOn;
 	
-	public Emergency(String id, String detail, String lat, String lng, String timestamp, boolean mapOn, String abstr, String reportNUM) {
-		super(id,detail,lat,lng,timestamp);
-		this.abstr = abstr;
-		this.reportNUM = reportNUM;
-		this.mapOn = mapOn;
+
+	public Emergency(JSONObject json) throws JSONException {
+		super(json);
+		this.abstr = json.getString("abstract");
+		this.reportNUM = json.getString("report");
+
+		this.mapOn = json.getBoolean("mapOn");
 	}
 
 	@Override
