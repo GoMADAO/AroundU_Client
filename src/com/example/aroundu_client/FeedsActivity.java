@@ -12,11 +12,13 @@ import data.Importance;
 import data.Normal;
 import util.Helper;
 import util.Server;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -27,11 +29,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
-
+	ListView listview;
+	public void emergencyShowDetail(View v){
+		goToEmgDetails();
+	}
+	private void goToEmgDetails() {
+		Intent intent = new Intent(this, EmgDetailsActivity.class);
+		startActivity(intent);
+		finish();
+	}
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -73,7 +85,22 @@ public class FeedsActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feeds);
-
+		
+		Intent intent = getIntent();
+		String lat = intent.getStringExtra("lat");
+		String lng = intent.getStringExtra("lng");
+		
+		/*
+		 * request feeds from server
+		 * 
+		 */
+		 
+//		 feedAdapter feedadapter = new feedAdapter(this, R.id.row, events);
+//		 listview = (ListView) findViewById(R.id.feedList);
+//		 listview.setAdapter(feedadapter);
+		 
+		
+		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
