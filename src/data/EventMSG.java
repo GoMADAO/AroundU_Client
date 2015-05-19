@@ -1,17 +1,20 @@
 package data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public abstract class EventMSG {
 	public String id;
 	public String text;
 	public String lat, lng;
 	public String timestamp;
 	
-	public EventMSG(String id, String text, String lat, String lng, String timestamp){
-		this.id = id;
-		this.text = text;
-		this.lat = lat;
-		this.lng = lng;
-		this.timestamp = timestamp;
+	public EventMSG(JSONObject json) throws JSONException{
+		this.id = json.getString("id");
+		this.text = json.getString("text");
+		this.lat = json.getString("lat");
+		this.lng = json.getString("lon");
+		this.timestamp = json.getString("time");
 	}
 	
 	protected abstract int getType();

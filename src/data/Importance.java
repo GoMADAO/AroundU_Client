@@ -1,12 +1,14 @@
 package data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import util.Helper;
 
 public class Importance extends EventMSG{
 
-	public Importance(String id, String text, String lat, String lng,
-			String timestamp, String abstr, String reportNUM) {
-		super(id, text, lat, lng, timestamp);
+	public Importance(JSONObject json) throws JSONException {
+		super(json);
 		this.abstr = abstr;
 		this.reportNUM = reportNUM;
 	}

@@ -1,13 +1,15 @@
 package data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import util.Helper;
 
 public class Normal extends EventMSG{
-	public Normal(String id, String text, String lat, String lng, 
-			String timestamp, String topic, String likes ) {
-		super( id,  text,  lat,  lng,  timestamp);
-		this.topic = topic;
-		this.likeNum = likes;
+	public Normal(JSONObject json ) throws JSONException {
+		super( json);
+		
+		
 	}
 	public String topic;
 	public String likeNum;
