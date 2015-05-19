@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import data.Emergency;
 import data.EventMSG;
+import data.Importance;
 
 public class Server4Emer extends Server{
 	private String service = "Writer";
@@ -36,8 +37,20 @@ public class Server4Emer extends Server{
 		
 	}
 	
-	public void report(){
-		
+	public void report(EventMSG msg){
+		Emergency e = (Emergency)msg;
+		JSONObject json = new JSONObject();
+		try {
+			JSONObject inner = new JSONObject();
+			inner.put("type", "normal");
+			inner.put("id", e.id);
+			json.put("MSG", inner);
+			json.put("OP", "like");
+			
+			
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	

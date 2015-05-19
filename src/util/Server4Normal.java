@@ -35,12 +35,13 @@ public class Server4Normal extends Server{
 		
 	}
 	
-	public void dislike(String id){
+	public void dislike(EventMSG msg){
+		Normal n =(Normal)msg;
 		JSONObject json = new JSONObject();
 		try {
 			JSONObject inner = new JSONObject();
 			inner.put("type", "normal");
-			inner.put("id", id);
+			inner.put("id", n.id);
 			json.put("MSG", inner);
 			json.put("OP", "dislike");
 			
@@ -54,12 +55,13 @@ public class Server4Normal extends Server{
 		
 	}
 	
-	public void like(String id){
+	public void like(EventMSG msg){
+		Normal n =(Normal)msg;
 		JSONObject json = new JSONObject();
 		try {
 			JSONObject inner = new JSONObject();
 			inner.put("type", "normal");
-			inner.put("id", id);
+			inner.put("id", n.id);
 			json.put("MSG", inner);
 			json.put("OP", "like");
 			
