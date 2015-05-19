@@ -60,6 +60,7 @@ public class FeedsActivity extends Activity implements
 	private List<data.Emergency> emrList=null;
 	private List<data.Importance> impList=null;
 	private List<data.Normal> norList=null;
+	private ArrayList<data.EventMSG> events=null;
 	Server server =null;
 	
 	
@@ -71,6 +72,9 @@ public class FeedsActivity extends Activity implements
 		impList = new ArrayList<data.Importance>();
 		norList = new ArrayList<data.Normal>();
 		for (int i=0;i<nors.length();i++){
+			if(nors.getJSONObject(i).getString("text")==null){
+				System.out.println("Yuan found that!!!");
+			}
 			norList.add(new Normal(nors.getJSONObject(i)));
 		}
 		for (int i=0;i<imps.length();i++){
@@ -89,17 +93,6 @@ public class FeedsActivity extends Activity implements
 		Intent intent = getIntent();
 		String lat = intent.getStringExtra("lat");
 		String lng = intent.getStringExtra("lng");
-		
-		/*
-		 * request feeds from server
-		 * 
-		 */
-		 
-//		 feedAdapter feedadapter = new feedAdapter(this, R.id.row, events);
-//		 listview = (ListView) findViewById(R.id.feedList);
-//		 listview.setAdapter(feedadapter);
-		 
-		
 		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -121,6 +114,20 @@ public class FeedsActivity extends Activity implements
 			e.printStackTrace();
 		}
 		
+		events = new ArrayList<data.EventMSG>();
+		for(Emergency emr:emrList){
+			if (emr!=null) events.add(emr);
+		}
+		for(Importance imp:impList){
+			if (imp!=null) events.add(imp);
+		}
+		for(Normal nor:norList){
+			if (nor!=null) events.add(nor);
+		}
+		
+		feedAdapter feedadapter = new feedAdapter(this, R.id.row, events);
+		listview = (ListView) findViewById(R.id.feedList);
+		listview.setAdapter(feedadapter);
 		
 	}
 
