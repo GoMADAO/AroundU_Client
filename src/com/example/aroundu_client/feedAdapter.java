@@ -41,19 +41,30 @@ public class feedAdapter extends ArrayAdapter{
 		Importance importance = null;
 		Emergency emergency = null;
 		
+		switch (type) {
+		case 0:
+			normal = (Normal)events.get(position);
+			break;
+		case 1:
+			importance = (Importance)events.get(position);
+			break;
+		case 2:
+			emergency = (Emergency)events.get(position);
+			break;
+		}
+		
 		if (convertView == null){
 			switch (type) {
 			case 0:
-				normal = (Normal)events.get(position);
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_normal, null);
 				TextView textView = (TextView) convertView.findViewById(R.id.text_normal);
 				Button button_like = (Button) convertView.findViewById(R.id.button_like);
+				TextView likeCount = (TextView) convertView.findViewById(R.id.likeCount);
 				Button button_dislike = (Button) convertView.findViewById(R.id.button_dislike);
-				viewholder2 = new ViewHolder2(textView, button_like, button_dislike);
+				viewholder2 = new ViewHolder2(textView, button_like, likeCount, button_dislike);
 				convertView.setTag(viewholder2);
 				break;
 			case 1:
-				importance = (Importance)events.get(position);
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_importance, null);
 				textView = (TextView) convertView.findViewById(R.id.text_importance);
 				Button report = (Button) convertView.findViewById(R.id.button_report);
@@ -61,7 +72,6 @@ public class feedAdapter extends ArrayAdapter{
 				convertView.setTag(viewholder1);
 				break;
 			case 2:
-				emergency = (Emergency)events.get(position);
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_emergency, null);
 				textView = (TextView) convertView.findViewById(R.id.text_emergency);
 				report = (Button) convertView.findViewById(R.id.button_report);
@@ -82,12 +92,16 @@ public class feedAdapter extends ArrayAdapter{
 		switch (type){
 		case 0:
 			viewholder2.text.setText(normal.text);
+			viewholder2.likeCount.setText(normal.likeNum);
 			break;
 		case 1:
 			viewholder1.text.setText(importance.abstr);
 			break;
 		case 2:
 			viewholder1.text.setText(emergency.abstr);
+			break;
+		default:
+			System.out.println("null!");
 			break;
 		}
 		return convertView;
