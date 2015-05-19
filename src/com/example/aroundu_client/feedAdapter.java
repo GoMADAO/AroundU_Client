@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class feedAdapter extends ArrayAdapter{
 	ArrayList<EventMSG> events = new ArrayList<EventMSG>();
@@ -43,7 +44,7 @@ public class feedAdapter extends ArrayAdapter{
 		Normal normal = null;
 		Importance importance = null;
 		Emergency emergency = null;
-		Server4Normal server = new Server4Normal();
+		final Server4Normal server = new Server4Normal();
 		
 		switch (type) {
 		case 0:
@@ -65,10 +66,11 @@ public class feedAdapter extends ArrayAdapter{
 				Button button_like = (Button) convertView.findViewById(R.id.button_like);
 				TextView likeCount = (TextView) convertView.findViewById(R.id.likeCount);
 				Button button_dislike = (Button) convertView.findViewById(R.id.button_dislike);
-				button_like.setOnClickListener(new OnClickListener(){
+				button_dislike.setTag(normal.id);
+				button_dislike.setOnClickListener(new OnClickListener(){
 					@Override
 					public void onClick(View v) {
-						//server.dislike(normal);
+						server.dislike(""+v.getTag());
 					}
 				});
 				viewholder2 = new ViewHolder2(textView, button_like, likeCount, button_dislike);
