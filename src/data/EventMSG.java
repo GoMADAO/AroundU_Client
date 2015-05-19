@@ -17,5 +17,11 @@ public abstract class EventMSG {
 		this.timestamp = json.getString("time");
 	}
 	
+	public EventMSG(String text, String abstr){
+		this.text = text;
+	}
+	
+	
+	
 	public abstract int getType();
 }

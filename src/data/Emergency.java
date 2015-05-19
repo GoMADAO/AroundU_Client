@@ -18,6 +18,11 @@ public class Emergency extends EventMSG{
 
 		this.mapOn = json.getBoolean("mapOn");
 	}
+	
+	public Emergency(String text, String abstr){
+		super(text, null);
+		this.abstr = abstr;
+	}
 
 	@Override
 	public int getType() {

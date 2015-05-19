@@ -2,9 +2,11 @@ package util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +24,7 @@ public class Server {
 	
 	
 	public void insert(EventMSG msg,String lati, String longi){
-		
+		System.out.println("wrong");
 	}
 	
 	public String select(String lati, String longi){
@@ -46,7 +48,12 @@ public class Server {
 		String result=null;
 		StringBuffer url =  new StringBuffer();
 		url.append(Helper.IP).append("/").append(service).append("?data=");
-		url.append(data.toString());
+		try {
+			url.append(URLEncoder.encode(data.toString(), "UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		System.out.println("URL:"+url.toString());
 		
