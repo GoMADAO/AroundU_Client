@@ -26,6 +26,10 @@
             android:name=".FeedsActivity"
             android:label="@string/title_activity_feeds" >
         </activity>
+        <activity
+            android:name=".EmgDetailsActivity"
+            android:label="@string/title_activity_emg_details" >
+        </activity>
     </application>
 
 </manifest>

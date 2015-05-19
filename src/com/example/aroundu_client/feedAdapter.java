@@ -45,8 +45,8 @@ public class feedAdapter extends ArrayAdapter{
 			switch (type) {
 			case 0:
 				normal = (Normal)events.get(position);
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout2, null);
-				TextView textView = (TextView) convertView.findViewById(R.id.text);
+				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_normal, null);
+				TextView textView = (TextView) convertView.findViewById(R.id.text_normal);
 				Button button_like = (Button) convertView.findViewById(R.id.button_like);
 				Button button_dislike = (Button) convertView.findViewById(R.id.button_dislike);
 				viewholder2 = new ViewHolder2(textView, button_like, button_dislike);
@@ -54,16 +54,16 @@ public class feedAdapter extends ArrayAdapter{
 				break;
 			case 1:
 				importance = (Importance)events.get(position);
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout1, null);
-				textView = (TextView) convertView.findViewById(R.id.text);
+				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_importance, null);
+				textView = (TextView) convertView.findViewById(R.id.text_importance);
 				Button report = (Button) convertView.findViewById(R.id.button_report);
 				viewholder1 = new ViewHolder1(textView, report);
 				convertView.setTag(viewholder1);
 				break;
 			case 2:
 				emergency = (Emergency)events.get(position);
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout1, null);
-				textView = (TextView) convertView.findViewById(R.id.text);
+				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_emergency, null);
+				textView = (TextView) convertView.findViewById(R.id.text_emergency);
 				report = (Button) convertView.findViewById(R.id.button_report);
 				viewholder1 = new ViewHolder1(textView, report);
 				convertView.setTag(viewholder1);

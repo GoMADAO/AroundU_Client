@@ -8,12 +8,13 @@
     android:orientation="horizontal" >
     
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/text_emergency"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:layout_weight="0.7"
         android:textColor="@android:color/white"
+        android:onClick="emergencyShowDetail"
         android:textSize="24sp" />
     <Button
         android:id="@+id/button_report"

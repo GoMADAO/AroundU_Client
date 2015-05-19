@@ -7,7 +7,6 @@
     <uses-sdk
         android:minSdkVersion="22"
         android:targetSdkVersion="22" />
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -26,6 +25,10 @@
         <activity
             android:name=".FeedsActivity"
             android:label="@string/title_activity_feeds" >
+        </activity>
+        <activity
+            android:name=".EmgDetailsActivity"
+            android:label="@string/title_activity_emg_details" >
         </activity>
     </application>
 
