@@ -1,7 +1,18 @@
 package com.example.aroundu_client;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import data.Emergency;
+import data.Importance;
+import data.Normal;
+import util.Helper;
+import util.Server;
+import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -33,6 +44,31 @@ public class FeedsActivity extends Activity implements
 	 */
 	private CharSequence mTitle;
 
+	
+	private List<data.Emergency> emrList=null;
+	private List<data.Importance> impList=null;
+	private List<data.Normal> norList=null;
+	Server server =null;
+	
+	
+	private void save2List(JSONObject json) throws JSONException{
+		JSONArray nors = json.getJSONArray("normal");
+		JSONArray imps = json.getJSONArray("importance");
+		JSONArray emes = json.getJSONArray("emergency");
+		emrList = new ArrayList<data.Emergency>();
+		impList = new ArrayList<data.Importance>();
+		norList = new ArrayList<data.Normal>();
+		for (int i=0;i<nors.length();i++){
+			norList.add(new Normal(nors.getJSONObject(i)));
+		}
+		for (int i=0;i<imps.length();i++){
+			impList.add(new Importance(imps.getJSONObject(i)));
+		}
+		for (int i=0;i<emes.length();i++){
+			emrList.add(new Emergency(emes.getJSONObject(i)));
+		}
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +81,20 @@ public class FeedsActivity extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
+		server = new Server();
+		//server.select("40.8438597", "-73.9365103,14");
+		try {
+			JSONObject json = new JSONObject(server.select("40.8438597", "-73.9365103,14"));
+			System.out.println(json.toString());
+			save2List(json);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	@Override
