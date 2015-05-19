@@ -11,7 +11,6 @@ public final class Helper {
 	public static boolean isBLOCK = false;
 	public static boolean isACTIVE = true;
 
-
 	public static final String IP="http://160.39.175.67:8080/finalproj";
 	
 	public static final int NORMAL = 0;
