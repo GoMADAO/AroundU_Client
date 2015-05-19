@@ -14,5 +14,5 @@ public abstract class EventMSG {
 		this.timestamp = timestamp;
 	}
 	
-	protected abstract int getType();
+	public abstract int getType();
 }

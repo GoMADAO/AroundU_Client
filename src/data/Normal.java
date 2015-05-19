@@ -12,7 +12,7 @@ public class Normal extends EventMSG{
 	public String topic;
 	public String likeNum;
 	@Override
-	protected int getType() {
+	public int getType() {
 		// TODO Auto-generated method stub
 		return Helper.NORMAL;
 	}

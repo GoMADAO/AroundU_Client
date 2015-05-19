@@ -48,10 +48,26 @@ public class MainActivity extends Activity {
 		 *  get user_id & user_name & isBlock & isActive & (lat,lng)
 		 */
 		
+		//fake data
+		String user_id = "yf2338";
+		String user_name = "AlexandraVon";
+		boolean isBlock = false;
+		boolean isActive = true;
+		String lat = "40.8438597";
+		String lng = "-73.9365103,14";
+		
 //		Server server = new Server();
 //		String result = server.select("40.8438597", "-73.9365103,14");
 //		if(result!=null)
 //			System.out.println(result);
+		
+		Helper.USERID = user_id;
+		Helper.USERNAME = user_name;
+		Helper.isBLOCK = isBlock;
+		Helper.isACTIVE = isActive;
+		
+		intent.putExtra("lat", lat);
+		intent.putExtra("lng", lng);
 		
 		
 		startActivity(intent);
