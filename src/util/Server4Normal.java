@@ -55,13 +55,13 @@ public class Server4Normal extends Server{
 		
 	}
 	
-	public void like(EventMSG msg){
-		Normal n =(Normal)msg;
+	public void like(String id){
+		
 		JSONObject json = new JSONObject();
 		try {
 			JSONObject inner = new JSONObject();
 			inner.put("type", "normal");
-			inner.put("id", n.id);
+			inner.put("id", id);
 			json.put("MSG", inner);
 			json.put("OP", "like");
 			

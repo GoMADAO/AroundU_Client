@@ -37,13 +37,13 @@ public class Server4Emer extends Server{
 		
 	}
 	
-	public void report(EventMSG msg){
-		Emergency e = (Emergency)msg;
+	public void report(String id){
+		
 		JSONObject json = new JSONObject();
 		try {
 			JSONObject inner = new JSONObject();
 			inner.put("type", "normal");
-			inner.put("id", e.id);
+			inner.put("id", id);
 			json.put("MSG", inner);
 			json.put("OP", "like");
 			
@@ -51,6 +51,7 @@ public class Server4Emer extends Server{
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
+		callGet(json, service);
 	}
 	
 	
