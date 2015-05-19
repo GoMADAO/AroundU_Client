@@ -2,6 +2,8 @@ package com.example.aroundu_client;
 
 import java.util.ArrayList;
 
+import util.Server;
+import util.Server4Normal;
 import data.Emergency;
 import data.EventMSG;
 import data.Importance;
@@ -9,6 +11,7 @@ import data.Normal;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,6 +43,7 @@ public class feedAdapter extends ArrayAdapter{
 		Normal normal = null;
 		Importance importance = null;
 		Emergency emergency = null;
+		Server4Normal server = new Server4Normal();
 		
 		switch (type) {
 		case 0:
@@ -61,6 +65,12 @@ public class feedAdapter extends ArrayAdapter{
 				Button button_like = (Button) convertView.findViewById(R.id.button_like);
 				TextView likeCount = (TextView) convertView.findViewById(R.id.likeCount);
 				Button button_dislike = (Button) convertView.findViewById(R.id.button_dislike);
+				button_like.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						//server.dislike(normal);
+					}
+				});
 				viewholder2 = new ViewHolder2(textView, button_like, likeCount, button_dislike);
 				convertView.setTag(viewholder2);
 				break;
@@ -99,9 +109,6 @@ public class feedAdapter extends ArrayAdapter{
 			break;
 		case 2:
 			viewholder1.text.setText(emergency.abstr);
-			break;
-		default:
-			System.out.println("null!");
 			break;
 		}
 		return convertView;
