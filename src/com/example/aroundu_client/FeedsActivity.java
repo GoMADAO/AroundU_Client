@@ -12,7 +12,6 @@ import data.Importance;
 import data.Normal;
 import util.Helper;
 import util.Server;
-
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -26,24 +25,20 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
+	
 	ListView listview;
-	public void emergencyShowDetail(View v){
-		goToEmgDetails();
-	}
-	private void goToEmgDetails() {
-		Intent intent = new Intent(this, EmgDetailsActivity.class);
-		startActivity(intent);
-		finish();
-	}
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -111,7 +106,6 @@ public class FeedsActivity extends Activity implements
 			save2List(json);
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -122,14 +116,20 @@ public class FeedsActivity extends Activity implements
 		for(Importance imp:impList){
 			if (imp!=null) events.add(imp);
 		}
-		for(Normal nor:norList){
-			if (nor!=null) events.add(nor);
+		for(int i=norList.size()-1; i>=0; i--){
+			if (norList.get(i)!=null) events.add(norList.get(i));
 		}
 		
-		feedAdapter feedadapter = new feedAdapter(this, R.id.row, events);
 		listview = (ListView) findViewById(R.id.feedList);
-		listview.setAdapter(feedadapter);
 		
+		feedAdapter feedadapter = new feedAdapter(this, R.id.row, events, new BtnClickListener(){
+			@Override
+			public void onBtnClick() {
+				((ArrayAdapter) listview.getAdapter()).notifyDataSetChanged();
+			}
+		});
+		
+		listview.setAdapter(feedadapter);
 	}
 
 	@Override

@@ -36,6 +36,18 @@
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting" >
         </activity>
+        <activity
+            android:name=".FeedNormalActivity"
+            android:label="@string/title_activity_feed_normal" >
+        </activity>
+        <activity
+            android:name=".FeedImportantActivity"
+            android:label="@string/title_activity_feed_important" >
+        </activity>
+        <activity
+            android:name=".FeedEmergencyActivity"
+            android:label="@string/title_activity_feed_emergency" >
+        </activity>
     </application>
 
 </manifest>
