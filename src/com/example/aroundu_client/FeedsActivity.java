@@ -11,7 +11,6 @@ import data.Emergency;
 import data.Importance;
 import data.Normal;
 import util.Server;
-
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -22,22 +21,23 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+
+
 
 
 public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
+	
 	ListView listview;
-	public void emergencyShowDetail(View v){
-		goToEmgDetails();
-	}
-	private void goToEmgDetails() {
-		Intent intent = new Intent(this, EmgDetailsActivity.class);
-		startActivity(intent);
-		finish();
-	}
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -71,9 +71,6 @@ public class FeedsActivity extends Activity implements
 		dropdownList = new ArrayList<String>();
 		
 		for (int i=0;i<nors.length();i++){
-			if(nors.getJSONObject(i).getString("text")==null){
-				System.out.println("Yuan found that!!!");
-			}
 			norList.add(new Normal(nors.getJSONObject(i)));
 		}
 		for (int i=0;i<imps.length();i++){
@@ -111,13 +108,34 @@ public class FeedsActivity extends Activity implements
 		//server.select("40.8438597", "-73.9365103,14");
 		try {
 			JSONObject json = new JSONObject(server.select("40.8438597", "-73.9365103,14"));
+			//here to use the selected data to do analysis and return all the tags
 			System.out.println(json.toString());
 			save2List(json);
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//fake dropdown list
+		ArrayList<String> dropdownList = new ArrayList<String>();
+		dropdownList.add("Columbia");
+		dropdownList.add("New York");
+		dropdownList.add("Manhattan");
+		
+		Spinner dropdown = (Spinner) findViewById(R.id.topic_dropdown);
+		ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dropdownList);
+		dropdown.setAdapter(dropdownAdapter);
+		dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				String curTopic = parent.getItemAtPosition(position).toString();
+				
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				
+			}
+		});
 		
 		events = new ArrayList<data.EventMSG>();
 		for(Emergency emr:emrList){
@@ -126,14 +144,20 @@ public class FeedsActivity extends Activity implements
 		for(Importance imp:impList){
 			if (imp!=null) events.add(imp);
 		}
-		for(Normal nor:norList){
-			if (nor!=null) events.add(nor);
+		for(int i=norList.size()-1; i>=0; i--){
+			if (norList.get(i)!=null) events.add(norList.get(i));
 		}
 		
-		feedAdapter feedadapter = new feedAdapter(this, R.id.row, events);
 		listview = (ListView) findViewById(R.id.feedList);
-		listview.setAdapter(feedadapter);
 		
+		feedAdapter feedadapter = new feedAdapter(this, R.id.row, events, new BtnClickListener(){
+			@Override
+			public void onBtnClick() {
+				((ArrayAdapter) listview.getAdapter()).notifyDataSetChanged();
+			}
+		});
+		
+		listview.setAdapter(feedadapter);
 	}
 
 	@Override

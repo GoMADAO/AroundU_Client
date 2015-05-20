@@ -71,6 +71,7 @@
 	        android:layout_height="match_parent"
 	        android:orientation="horizontal">
 	        <TextView 
+
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
@@ -78,6 +79,7 @@
 	        android:textSize="20sp"
 	        android:text="Search Range" 
 	        tools:ignore="HardcodedText"/>
+
 	        <SeekBar 
 	            android:id="@+id/range_seekbar"
 	            android:layout_width="0dp"

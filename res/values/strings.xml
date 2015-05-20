@@ -17,5 +17,8 @@
     <string name="title_activity_emg_details">EmgDetailsActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_feed_normal">FeedNormalActivity</string>
+    <string name="title_activity_feed_important">FeedImportantActivity</string>
+    <string name="title_activity_feed_emergency">FeedEmergencyActivity</string>
 
 </resources>
