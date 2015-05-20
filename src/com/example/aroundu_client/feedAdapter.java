@@ -105,6 +105,7 @@ public class feedAdapter extends ArrayAdapter{
 				textView = (TextView) convertView.findViewById(R.id.text_emergency);
 				report = (Button) convertView.findViewById(R.id.button_report);
 				
+				textView.setTag(emergency);
 				report.setTag(emergency);
 				
 				viewholder1 = new ViewHolder1(textView, report);
@@ -181,8 +182,14 @@ public class feedAdapter extends ArrayAdapter{
 			viewholder1.text.setOnClickListener(new OnClickListener(){
 				@Override
 				public void onClick(View v) {
+					Emergency tmp = (Emergency) v.getTag();
+					//here to go to emergency detail page, putExtra of the details
 					Intent intent = new Intent(activity, EmgDetailsActivity.class);
-					
+					intent.putExtra("emer_details", tmp.text);
+					intent.putExtra("emer_mapon", tmp.mapOn);
+					intent.putExtra("emer_lat", tmp.lat);
+					intent.putExtra("emer_lng", tmp.lng);
+					activity.startActivity(intent);
 				}
 			});
 			viewholder1.report.setOnClickListener(new OnClickListener(){
