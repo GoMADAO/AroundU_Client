@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 	});
 	}
 	public void gotoFeeds(View v){
-		Intent intent = new Intent(this, FeedsActivity.class);
+		Intent intent = new Intent(this, SettingActivity.class);
 		
 		//TODO check login
 		/**

@@ -1,11 +1,19 @@
 package com.example.aroundu_client;
 
-import android.app.Activity;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
+import util.Helper;
+import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,6 +24,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class SettingActivity extends Activity implements
@@ -32,6 +44,14 @@ public class SettingActivity extends Activity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	private ImageView userPhoto;
+	private Bitmap userPic;
+	private TextView username;
+	private Switch myblock;
+	private SeekBar myrange;
+	
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +65,52 @@ public class SettingActivity extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
+		username = (TextView) findViewById(R.id.user_name);
+		username.setText(Helper.USERNAME);
+		
+		userPhoto = (ImageView) findViewById(R.id.user_photo);
+		userPic = getPhotoFromURL(Helper.PATH);
+		userPhoto.setImageBitmap(userPic);
+		
+		myblock = (Switch)findViewById(R.id.block_switch);
+		myblock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		        // do something, the isChecked will be
+		        // true if the switch is in the On position
+		    	if(isChecked)
+		    		Helper.isBLOCK=true;
+		    	else
+		    		Helper.isBLOCK = false;
+		    	System.out.println(Helper.isBLOCK);
+		    	
+		    }
+		});
+		
+		
+		
 	}
 
+	private Bitmap getPhotoFromURL(String url){
+		Bitmap bm = null;
+		try {
+			URL link = new URL(url);
+			URLConnection con = link.openConnection();
+			con.setDoInput(true);
+			InputStream is = con.getInputStream();
+			bm = BitmapFactory.decodeStream(is);
+
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bm;
+	}
+	
+	
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
