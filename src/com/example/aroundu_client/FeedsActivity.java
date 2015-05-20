@@ -10,28 +10,22 @@ import org.json.JSONObject;
 import data.Emergency;
 import data.Importance;
 import data.Normal;
-import util.Helper;
 import util.Server;
 
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -60,6 +54,7 @@ public class FeedsActivity extends Activity implements
 	private List<data.Emergency> emrList=null;
 	private List<data.Importance> impList=null;
 	private List<data.Normal> norList=null;
+	private List<String> dropdownList=null;
 	private ArrayList<data.EventMSG> events=null;
 	Server server =null;
 	
@@ -68,9 +63,13 @@ public class FeedsActivity extends Activity implements
 		JSONArray nors = json.getJSONArray("normal");
 		JSONArray imps = json.getJSONArray("importance");
 		JSONArray emes = json.getJSONArray("emergency");
+		JSONArray tops = json.getJSONArray("topiclist");
 		emrList = new ArrayList<data.Emergency>();
 		impList = new ArrayList<data.Importance>();
 		norList = new ArrayList<data.Normal>();
+		
+		dropdownList = new ArrayList<String>();
+		
 		for (int i=0;i<nors.length();i++){
 			if(nors.getJSONObject(i).getString("text")==null){
 				System.out.println("Yuan found that!!!");
@@ -82,6 +81,11 @@ public class FeedsActivity extends Activity implements
 		}
 		for (int i=0;i<emes.length();i++){
 			emrList.add(new Emergency(emes.getJSONObject(i)));
+		}
+		for(int i=0;i<tops.length();i++){
+			System.out.println(tops.getJSONObject(i).toString());
+			dropdownList.add(tops.getJSONObject(i).toString());
+			
 		}
 	}
 	

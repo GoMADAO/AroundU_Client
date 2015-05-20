@@ -9,26 +9,28 @@ import java.net.URLConnection;
 import util.Helper;
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -49,8 +51,9 @@ public class SettingActivity extends Activity implements
 	private TextView username;
 	private Switch myblock;
 	private SeekBar myrange;
+	private TextView rangeText;
 	
-	
+	private boolean creation = true;
 	
 
 	@Override
@@ -66,6 +69,7 @@ public class SettingActivity extends Activity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
+		
 		username = (TextView) findViewById(R.id.user_name);
 		username.setText(Helper.USERNAME);
 		
@@ -74,19 +78,71 @@ public class SettingActivity extends Activity implements
 		userPhoto.setImageBitmap(userPic);
 		
 		myblock = (Switch)findViewById(R.id.block_switch);
-		myblock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		        // do something, the isChecked will be
-		        // true if the switch is in the On position
-		    	if(isChecked)
-		    		Helper.isBLOCK=true;
-		    	else
-		    		Helper.isBLOCK = false;
-		    	System.out.println(Helper.isBLOCK);
-		    	
-		    }
+		myblock.setChecked(Helper.isBLOCK);
+		myblock.setOnCheckedChangeListener(
+			new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView,
+					     boolean isChecked) {
+
+					if(isChecked){
+					     System.out.println("Switch is currently ON");
+					     Helper.isBLOCK=true;
+					     Toast.makeText(getApplicationContext()
+									, "Show importance and emergency"
+									, Toast.LENGTH_SHORT).show();
+					}else{
+					    	System.out.println("Switch is currently OFF");
+					    	Helper.isBLOCK=false;
+					    	Toast.makeText(getApplicationContext()
+									, "Block importance and emergency"
+									, Toast.LENGTH_SHORT).show();
+					}
+
+				}
+			});
+		myblock.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
 		});
 		
+		myrange = (SeekBar) findViewById(R.id.range_seekbar);
+		myrange.setProgress(Helper.range);
+		rangeText = (TextView) findViewById(R.id.range_text);
+		rangeText.setText(myrange.getProgress()+"/"+myrange.getMax());
+		myrange.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			int progressChanged = 0;
+
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+				progressChanged = progress;
+			}
+
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+			}
+
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				if (progressChanged ==0){
+					Toast.makeText(getApplicationContext()
+							, "You don't want see anything? T_T"
+							, Toast.LENGTH_SHORT).show();
+					progressChanged = Helper.range;
+					seekBar.setProgress(progressChanged);
+					rangeText.setText(Helper.range+"/"+myrange.getMax());
+					
+				}else{
+					rangeText.setText(progressChanged+"/"+seekBar.getMax());
+					Helper.range = progressChanged;
+				}
+				
+				
+			}
+		});
 		
 		
 	}
@@ -119,6 +175,40 @@ public class SettingActivity extends Activity implements
 				.beginTransaction()
 				.replace(R.id.container,
 						PlaceholderFragment.newInstance(position + 1)).commit();
+		
+		if(creation){
+			creation = false;
+		}else{
+			Intent i ;
+			switch(position){
+			case 0:
+				System.out.println("Got 0");
+				i = new Intent(this, FeedsActivity.class);
+				startActivity(i);
+				finish();
+				break;
+			case 1:
+				System.out.println("Got 1");
+				break;
+			case 2:
+				System.out.println("Got 2");
+				//TODO to be finished
+				new  AlertDialog.Builder(this)  
+				.setTitle("New..." )  
+				.setMultiChoiceItems(new  String[] {"Moment", "Announcement", "Emergency" }
+					, null, null )  
+				.setPositiveButton("Yes" ,  null )  
+				.show();  
+				
+				
+//				i = new Intent(this, FeedsActivity.class);
+//				startActivity(i);
+//				finish();
+				break;
+			}
+		}
+		
+		System.out.println("gmf:"+position);
 	}
 
 	public void onSectionAttached(int number) {
@@ -196,6 +286,7 @@ public class SettingActivity extends Activity implements
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_setting,
 					container, false);
+			
 			return rootView;
 		}
 

@@ -270,7 +270,7 @@ public class NavigationDrawerFragment extends Fragment {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-
+		//System.out.println(item.getItemId());
 		if (item.getItemId() == R.id.action_example) {
 			Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT)
 					.show();
