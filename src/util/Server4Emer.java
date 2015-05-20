@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import data.Emergency;
 import data.EventMSG;
-import data.Importance;
+
 
 public class Server4Emer extends Server{
 	private String service = "Writer";
