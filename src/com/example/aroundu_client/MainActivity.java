@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import data.EventMSG;
 import data.Normal;
+import util.GPSService;
 import util.Helper;
 import util.Server;
 import util.Server4Normal;
@@ -37,6 +38,9 @@ public class MainActivity extends Activity {
 	  System.out.println(Helper.getRange());
 	  Button login = (Button) findViewById(R.id.btn);
 	  
+	  startService(new Intent(MainActivity.this, GPSService.class));
+	  
+//	  System.out.println("lat:"+Helper.lat+" lng:"+Helper.lng);
 //	  Server server = new Server4Normal();
 //	  EventMSG msg= new Normal("first text", null);
 //	
@@ -51,7 +55,7 @@ public class MainActivity extends Activity {
 	});
 	}
 	public void gotoFeeds(View v){
-		Intent intent = new Intent(this, FeedsActivity.class);
+		Intent intent = new Intent(this, SettingActivity.class);
 		
 		//TODO check login
 		/**
@@ -59,7 +63,7 @@ public class MainActivity extends Activity {
 		 *  
 		 *  get user_id & user_name & isBlock & isActive & (lat,lng)
 		 */
-		
+		System.out.println("lat:"+Helper.lat+" lng:"+Helper.lng);
 		//fake data
 		String user_id = "yf2338";
 		String user_name = "AlexandraVon";

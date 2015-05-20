@@ -37,10 +37,10 @@ JSONObject json = new JSONObject();
 		JSONObject json = new JSONObject();
 		try {
 			JSONObject inner = new JSONObject();
-			inner.put("type", "normal");
+			inner.put("type", "importance");
 			inner.put("id", id);
 			json.put("MSG", inner);
-			json.put("OP", "like");
+			json.put("OP", "report");
 			
 			
 		} catch (JSONException e) {
