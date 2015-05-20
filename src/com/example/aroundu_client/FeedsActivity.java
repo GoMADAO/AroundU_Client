@@ -122,7 +122,7 @@ public class FeedsActivity extends Activity implements
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				String curTopic = parent.getItemAtPosition(position).toString();
-				
+				if (curTopic.equals("All Topics"));
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
