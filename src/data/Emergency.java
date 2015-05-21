@@ -16,7 +16,7 @@ public class Emergency extends EventMSG{
 		this.abstr = json.getString("abstract");
 		this.reportNUM = json.getString("report");
 
-		this.mapOn = json.getBoolean("mapOn");
+		this.mapOn = (json.getString("map").equals("1"))?true:false;
 	}
 	
 	public Emergency(String text, String abstr){

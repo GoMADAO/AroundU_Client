@@ -72,19 +72,30 @@ public class FeedsActivity extends Activity implements
 		dropdownList = new ArrayList<String>();
 		dropdownList.add("All Topics");
 		
-		for (int i=0;i<nors.length();i++){
-			norList.add(new Normal(nors.getJSONObject(i)));
+		if(nors.length()!=0){
+			for (int i=0;i<nors.length();i++)
+				norList.add(new Normal(nors.getJSONObject(i)));
 		}
-		for (int i=0;i<imps.length();i++){
-			impList.add(new Importance(imps.getJSONObject(i)));
+		
+		if(imps.length()!=0){
+			for (int i=0;i<imps.length();i++)
+				impList.add(new Importance(imps.getJSONObject(i)));
+			
 		}
-		for (int i=0;i<emes.length();i++){
-			emrList.add(new Emergency(emes.getJSONObject(i)));
+		
+		if(emes.length()!=0){
+			for (int i=0;i<emes.length();i++)
+				emrList.add(new Emergency(emes.getJSONObject(i)));
 		}
-		for(int i=0;i<tops.length();i++){
-			System.out.println(tops.getString(i).toString());
-			dropdownList.add(tops.getString(i).toString());
+		
+		System.out.println("gmf:"+tops.length());
+		if(tops.length()!=0){
+			for(int i=0;i<tops.length();i++){
+				System.out.println("gmf:"+tops.getString(i).toString());
+				dropdownList.add(tops.getString(i).toString());
+			}
 		}
+		
 	}
 	
 	@Override
