@@ -18,7 +18,7 @@ JSONObject json = new JSONObject();
 			json.put("MSG", inner);
 			inner.put("type", "importance");
 			inner.put("abstract", i.abstr);
-			inner.put("detail", i.text);
+			inner.put("text", i.text);
 			inner.put("lat", lati);
 			inner.put("lng", longi);
 			inner.put("userid", Helper.USERID);

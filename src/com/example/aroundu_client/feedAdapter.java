@@ -132,7 +132,7 @@ public class feedAdapter extends ArrayAdapter{
 			try {
 				Date send = df.parse(sendTime);
 				Date now = new Date();
-				long diff = (now.getTime()-send.getTime())/(1000 * 60);
+				long diff = (now.getTime()-send.getTime())/(1000*60);
 				timePass += diff+" mins ago";
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -198,10 +198,6 @@ public class feedAdapter extends ArrayAdapter{
 					Emergency tmp = (Emergency) v.getTag();
 					server4imp.report(tmp.id);
 					int reportTimes = Integer.parseInt(tmp.reportNUM)+1;
-					if(reportTimes>5){
-						events.remove(tmp);
-					}
-					mClickListener.onBtnClick();
 				}
 			});
 			break;

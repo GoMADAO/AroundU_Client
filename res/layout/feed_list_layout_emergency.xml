@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
-        android:layout_weight="0.7"
+        android:layout_weight="0.85"
         android:textColor="@android:color/white"
         android:onClick="emergencyShowDetail"
         android:textSize="24sp" />
@@ -21,6 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:text="@string/button_report" 
-        android:layout_weight="0.3"/>
+        android:textColor="@android:color/white"
+        android:layout_weight="0.15"/>
 
 </LinearLayout>

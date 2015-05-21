@@ -12,6 +12,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -194,19 +195,21 @@ public class SettingActivity extends Activity implements
 				System.out.println("Got 1");
 				break;
 			case 2:
+				final String[] btnlist = new  String[] {"Moment", "Announcement", "Emergency" };
 				System.out.println("Got 2");
-				//TODO to be finished
 				new  AlertDialog.Builder(this)  
 				.setTitle("New..." )  
-				.setMultiChoiceItems(new  String[] {"Moment", "Announcement", "Emergency" }
-					, null, null )  
-				.setPositiveButton("Yes" ,  null )  
+				.setItems(btnlist, new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface dialogue, int which) {
+							Intent intent = null;
+							if (which==0){
+								intent = new Intent(SettingActivity.this,NewNormalActivity.class);
+							}
+							startActivity(intent);
+						}
+				})
 				.show();  
-				
-				
-//				i = new Intent(this, FeedsActivity.class);
-//				startActivity(i);
-//				finish();
 				break;
 			}
 		}

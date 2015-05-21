@@ -20,7 +20,7 @@ public class Server4Emer extends Server{
 			json.put("MSG", inner);
 			inner.put("type", "emergency");
 			inner.put("abstract", e.abstr);
-			inner.put("detail", e.text);
+			inner.put("text", e.text);
 			inner.put("map", (e.mapOn)?1:0);
 			inner.put("lat", lati);
 			inner.put("lng", longi);

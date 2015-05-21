@@ -16,6 +16,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 
@@ -38,8 +40,8 @@ import android.widget.Spinner;
 public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 	
-	ListView listview;
-	Spinner dropdown;
+	public static ListView listview;
+	public Spinner dropdown;
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -52,7 +54,6 @@ public class FeedsActivity extends Activity implements
 	 */
 	private CharSequence mTitle;
 
-	
 	private List<data.Emergency> emrList=null;
 	private List<data.Importance> impList=null;
 	private List<data.Normal> norList=null;
@@ -122,7 +123,6 @@ public class FeedsActivity extends Activity implements
 		//server.select("40.8438597", "-73.9365103,14");
 		try {
 			JSONObject json = new JSONObject(server.select("40.8438597", "-73.9365103,14"));
-			//here to use the selected data to do analysis and return all the tags
 			System.out.println(json.toString());
 			save2List(json);
 			
@@ -211,18 +211,28 @@ public class FeedsActivity extends Activity implements
 				finish();
 				break;
 			case 2:
+				final String[] btnlist = new  String[] {"Moment", "Announcement", "Emergency" };
 				System.out.println("Got 2");
-				//TODO to be finished
 				new  AlertDialog.Builder(this)  
 				.setTitle("New..." )  
-				.setMultiChoiceItems(new  String[] {"Moment", "Announcement", "Emergency" }
-					, null, null )  
-				.setPositiveButton("Yes" ,  null )  
+				.setItems(btnlist, new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface dialogue, int which) {
+							Intent intent = null;
+//							Toast.makeText(getBaseContext(), ""+which, Toast.LENGTH_LONG).show();
+							if (which==0){
+								intent = new Intent(FeedsActivity.this,NewNormalActivity.class);
+							}
+							else if(which==1){
+								intent = new Intent(FeedsActivity.this,NewImportanceActivity.class);
+							}
+							else if (which==2){
+								intent = new Intent(FeedsActivity.this,NewEmergencyActivity.class);
+							}
+							startActivity(intent);
+						}
+				})
 				.show();  
-					
-//				i = new Intent(this, FeedsActivity.class);
-//				startActivity(i);
-//				finish();
 				break;
 			}
 		}

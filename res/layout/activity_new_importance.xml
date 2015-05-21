@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="com.example.aroundu_client.NewImportanceActivity" >
+
+    <TextView
+        android:id="@+id/imp_abs"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="17dp"
+        android:text="Abstract"
+        android:layout_weight="0.08"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/imp_abs_input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/editform"
+        android:ems="10"
+        android:layout_weight="0.2"
+        android:gravity="top"
+        android:hint="abstract of your announcement..."
+        android:inputType="textMultiLine"
+        android:labelFor="@+id/imp_abs" />
+    
+    <TextView
+        android:id="@+id/imp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="17dp"
+        android:text="Details"
+        android:layout_weight="0.08"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/imp_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/editform"
+        android:ems="10"
+        android:layout_weight="0.5"
+        android:gravity="top"
+        android:hint="Your announcement..."
+        android:inputType="textMultiLine"
+        android:labelFor="@+id/imp_text" />
+
+    <Button
+        android:id="@+id/imp_send_btn"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Send" />
+
+</LinearLayout>

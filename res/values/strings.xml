@@ -7,6 +7,7 @@
     <string name="button_report">Report</string>
     <string name="button_like">Like</string>
     <string name="button_dislike">Dislike</string>
+    <string name="norm_input">Type your moment...</string>
     <string name="title_activity_feeds">FeedsActivity</string>
     <string name="title_section1">What\'s Up</string>
     <string name="title_section2">Settings</string>
@@ -20,5 +21,8 @@
     <string name="title_activity_feed_normal">FeedNormalActivity</string>
     <string name="title_activity_feed_important">FeedImportantActivity</string>
     <string name="title_activity_feed_emergency">FeedEmergencyActivity</string>
+    <string name="title_activity_new_normal">NewNormalActivity</string>
+    <string name="title_activity_new_importance">NewImportanceActivity</string>
+    <string name="title_activity_new_emergency">NewEmergencyActivity</string>
 
 </resources>
