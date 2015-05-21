@@ -69,6 +69,7 @@ public class FeedsActivity extends Activity implements
 		norList = new ArrayList<data.Normal>();
 		
 		dropdownList = new ArrayList<String>();
+		dropdownList.add("All Topics");
 		
 		for (int i=0;i<nors.length();i++){
 			norList.add(new Normal(nors.getJSONObject(i)));
@@ -82,7 +83,6 @@ public class FeedsActivity extends Activity implements
 		for(int i=0;i<tops.length();i++){
 			System.out.println(tops.getJSONObject(i).toString());
 			dropdownList.add(tops.getJSONObject(i).toString());
-			
 		}
 	}
 	
@@ -116,11 +116,15 @@ public class FeedsActivity extends Activity implements
 			e.printStackTrace();
 		}
 		
-		//fake dropdown list
-		ArrayList<String> dropdownList = new ArrayList<String>();
-		dropdownList.add("Columbia");
-		dropdownList.add("New York");
-		dropdownList.add("Manhattan");
+		
+		events = new ArrayList<data.EventMSG>();
+		
+		for(Emergency emr:emrList){
+			if (emr!=null) events.add(emr);
+		}
+		for(Importance imp:impList){
+			if (imp!=null) events.add(imp);
+		}
 		
 		Spinner dropdown = (Spinner) findViewById(R.id.topic_dropdown);
 		ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dropdownList);
@@ -129,24 +133,22 @@ public class FeedsActivity extends Activity implements
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				String curTopic = parent.getItemAtPosition(position).toString();
-				if (curTopic.equals("All Topics"));
+				if (curTopic.equals("All Topics")){
+					for(Normal norm:norList){
+						if (norm!=null) events.add(norm);
+					}
+				}
+				else{
+					for(Normal norm:norList){
+						if (norm!=null && norm.topic.equals(curTopic)) events.add(norm);
+					}
+				}
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				
 			}
 		});
-		
-		events = new ArrayList<data.EventMSG>();
-		for(Emergency emr:emrList){
-			if (emr!=null) events.add(emr);
-		}
-		for(Importance imp:impList){
-			if (imp!=null) events.add(imp);
-		}
-		for(int i=norList.size()-1; i>=0; i--){
-			if (norList.get(i)!=null) events.add(norList.get(i));
-		}
 		
 		listview = (ListView) findViewById(R.id.feedList);
 		
