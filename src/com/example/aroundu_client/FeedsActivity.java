@@ -38,6 +38,7 @@ public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 	
 	ListView listview;
+	Spinner dropdown;
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
 	 * navigation drawer.
@@ -126,7 +127,8 @@ public class FeedsActivity extends Activity implements
 			if (imp!=null) events.add(imp);
 		}
 		
-		Spinner dropdown = (Spinner) findViewById(R.id.topic_dropdown);
+		listview = (ListView) findViewById(R.id.feedList);
+		dropdown = (Spinner) findViewById(R.id.topic_dropdown);
 		ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dropdownList);
 		dropdown.setAdapter(dropdownAdapter);
 		dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -149,8 +151,6 @@ public class FeedsActivity extends Activity implements
 				
 			}
 		});
-		
-		listview = (ListView) findViewById(R.id.feedList);
 		
 		feedAdapter feedadapter = new feedAdapter(this, R.id.row, events, new BtnClickListener(){
 			@Override
