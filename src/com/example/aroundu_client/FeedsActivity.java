@@ -140,12 +140,22 @@ public class FeedsActivity extends Activity implements
 		
 		listview = (ListView) findViewById(R.id.feedList);
 		dropdown = (Spinner) findViewById(R.id.topic_dropdown);
+		
 		ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dropdownList);
 		dropdown.setAdapter(dropdownAdapter);
 		dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				String curTopic = parent.getItemAtPosition(position).toString();
+				if(listview.getAdapter()!=null){
+					events.clear();
+					for(Emergency emr:emrList){
+						if (emr!=null) events.add(emr);
+					}
+					for(Importance imp:impList){
+						if (imp!=null) events.add(imp);
+					}
+				}
 				if (curTopic.equals("All Topics")){
 					for(Normal norm:norList){
 						if (norm!=null) events.add(norm);
@@ -156,6 +166,7 @@ public class FeedsActivity extends Activity implements
 						if (norm!=null && norm.topic.equals(curTopic)) events.add(norm);
 					}
 				}
+				if(listview.getAdapter()!=null) ((ArrayAdapter) listview.getAdapter()).notifyDataSetChanged();
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
