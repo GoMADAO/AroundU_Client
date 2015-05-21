@@ -13,6 +13,7 @@ import data.Normal;
 import util.Server;
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -59,6 +60,7 @@ public class FeedsActivity extends Activity implements
 	private ArrayList<data.EventMSG> events=null;
 	Server server =null;
 	
+	private boolean creation = true;
 	
 	private void save2List(JSONObject json) throws JSONException{
 		JSONArray nors = json.getJSONArray("normal");
@@ -192,6 +194,38 @@ public class FeedsActivity extends Activity implements
 				.beginTransaction()
 				.replace(R.id.container,
 						PlaceholderFragment.newInstance(position + 1)).commit();
+		
+		
+		if(creation){
+			creation = false;
+		}else{
+			Intent i ;
+			switch(position){
+			case 0:
+				System.out.println("Got 0");
+				break;
+			case 1:
+				System.out.println("Got 1");
+				i = new Intent(this, SettingActivity.class);
+				startActivity(i);
+				finish();
+				break;
+			case 2:
+				System.out.println("Got 2");
+				//TODO to be finished
+				new  AlertDialog.Builder(this)  
+				.setTitle("New..." )  
+				.setMultiChoiceItems(new  String[] {"Moment", "Announcement", "Emergency" }
+					, null, null )  
+				.setPositiveButton("Yes" ,  null )  
+				.show();  
+					
+//				i = new Intent(this, FeedsActivity.class);
+//				startActivity(i);
+//				finish();
+				break;
+			}
+		}
 	}
 
 	public void onSectionAttached(int number) {
