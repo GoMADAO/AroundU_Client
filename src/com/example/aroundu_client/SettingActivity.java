@@ -2,9 +2,9 @@ package com.example.aroundu_client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import util.Helper;
 import android.app.Activity;
@@ -149,9 +149,10 @@ public class SettingActivity extends Activity implements
 
 	private Bitmap getPhotoFromURL(String url){
 		Bitmap bm = null;
+		HttpURLConnection con = null;
 		try {
 			URL link = new URL(url);
-			URLConnection con = link.openConnection();
+			con = (HttpURLConnection) link.openConnection();
 			con.setDoInput(true);
 			InputStream is = con.getInputStream();
 			bm = BitmapFactory.decodeStream(is);
@@ -162,6 +163,8 @@ public class SettingActivity extends Activity implements
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			con.disconnect();
 		}
 		return bm;
 	}
