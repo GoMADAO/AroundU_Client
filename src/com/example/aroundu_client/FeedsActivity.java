@@ -81,8 +81,8 @@ public class FeedsActivity extends Activity implements
 			emrList.add(new Emergency(emes.getJSONObject(i)));
 		}
 		for(int i=0;i<tops.length();i++){
-			System.out.println(tops.getJSONObject(i).toString());
-			dropdownList.add(tops.getJSONObject(i).toString());
+			System.out.println(tops.getString(i).toString());
+			dropdownList.add(tops.getString(i).toString());
 		}
 	}
 	
