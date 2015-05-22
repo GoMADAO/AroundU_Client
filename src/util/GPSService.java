@@ -1,8 +1,11 @@
 package util;
 
+import java.security.Provider;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,18 +27,20 @@ public class GPSService extends Service{
 	    @Override
 	    public void onLocationChanged(Location location) {
 	        // TODO Auto-generated method stub
+	    	
 	        Log.e("Google", "Location Changed");
 	        if (location == null)
 	            return;
 	        Helper.lat=location.getLatitude();
 	        Helper.lng=location.getLongitude();
-	        
+	        System.out.println(Helper.lat);
+	        System.out.println(Helper.lng);
 	    }
 
 	    @Override
 	    public void onProviderDisabled(String provider) {
 	        // TODO Auto-generated method stub
-	    	
+	    	Log.e("GOOGLE", "provider disabled");
 	    }
 
 	    @Override
@@ -86,9 +91,17 @@ public class GPSService extends Service{
 	    
 	    locationManager = (LocationManager) getApplicationContext()
 	            .getSystemService(Context.LOCATION_SERVICE);
-
+	    
+	    
+	   //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
+	    
+	    Criteria criteria = new Criteria(); 
+	    String provider = locationManager.getBestProvider(criteria, true); 
+	    Location devicelocation = locationManager.getLastKnownLocation(provider);
+	    Helper.lat = 40.8131995;
+	    Helper.lng = -122.084095;
 	    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-	            1000, 5, listener);
+	            0, 0, listener);
 
 	}
 	

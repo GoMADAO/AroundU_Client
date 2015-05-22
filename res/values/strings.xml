@@ -24,5 +24,7 @@
     <string name="title_activity_new_normal">NewNormalActivity</string>
     <string name="title_activity_new_importance">NewImportanceActivity</string>
     <string name="title_activity_new_emergency">NewEmergencyActivity</string>
-
+    <string name="title_activity_login">LoginActivity</string>
+	<string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_revoke_access">Revoke Access</string>
 </resources>

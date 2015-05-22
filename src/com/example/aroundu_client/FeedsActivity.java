@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import data.Emergency;
 import data.Importance;
 import data.Normal;
+import util.Helper;
 import util.Server;
 import android.app.Activity;
 import android.app.ActionBar;
@@ -107,8 +108,16 @@ public class FeedsActivity extends Activity implements
 		setContentView(R.layout.activity_feeds);
 		
 		Intent intent = getIntent();
-		String lat = intent.getStringExtra("lat");
-		String lng = intent.getStringExtra("lng");
+		
+		String user_id = intent.getStringExtra("user_id");
+		String user_name = intent.getStringExtra("user_name");
+		String photo_url = intent.getStringExtra("photo_url");
+		
+		Helper.USERID = user_id;
+		Helper.USERNAME = user_name;
+		Helper.PATH = photo_url;
+		
+		Toast.makeText(getBaseContext(), "id: "+user_id+" name: "+user_name+" photo: "+photo_url, Toast.LENGTH_LONG).show();
 		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
@@ -122,7 +131,7 @@ public class FeedsActivity extends Activity implements
 		
 		//server.select("40.8438597", "-73.9365103,14");
 		try {
-			JSONObject json = new JSONObject(server.select("40.8438597", "-73.9365103,14"));
+			JSONObject json = new JSONObject(server.select(""+Helper.lat, ""+Helper.lng));
 			System.out.println(json.toString());
 			save2List(json);
 			

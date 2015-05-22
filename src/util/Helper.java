@@ -4,9 +4,9 @@ package util;
 
 public final class Helper {
 	
-	public static String USERID="gmf";
-	public static String USERNAME="gmf";
-	public static String PATH = "https://www.google.com/images/srpr/logo11w.png";
+	public static String USERID="";
+	public static String USERNAME="";
+	public static String PATH = "";
 	
 	
 	public static int range = 10;

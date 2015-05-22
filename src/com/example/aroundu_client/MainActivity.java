@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 	  System.out.println(Helper.getRange());
 	  Button login = (Button) findViewById(R.id.btn);
 	  
-	  startService(new Intent(MainActivity.this, GPSService.class));
+	  startService(new Intent(this, GPSService.class));
 	  
 //	  System.out.println("lat:"+Helper.lat+" lng:"+Helper.lng);
 //	  Server server = new Server4Normal();
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 	});
 	}
 	public void gotoFeeds(View v){
-		Intent intent = new Intent(this, FeedsActivity.class);
+		Intent intent = new Intent(this, LoginActivity.class);
 		
 		//TODO check login
 		/**
@@ -65,25 +65,20 @@ public class MainActivity extends Activity {
 		 */
 		System.out.println("lat:"+Helper.lat+" lng:"+Helper.lng);
 		//fake data
-		String user_id = "yf2338";
-		String user_name = "AlexandraVon";
+//		String user_id = "yf2338";
+//		String user_name = "AlexandraVon";
 		boolean isBlock = false;
 		boolean isActive = true;
-		String lat = "40.8438597";
-		String lng = "-73.9365103,14";
 		
 //		Server server = new Server();
 //		String result = server.select("40.8438597", "-73.9365103,14");
 //		if(result!=null)
 //			System.out.println(result);
 		
-		Helper.USERID = user_id;
-		Helper.USERNAME = user_name;
+//		Helper.USERID = user_id;
+//		Helper.USERNAME = user_name;
 		Helper.isBLOCK = isBlock;
 		Helper.isACTIVE = isActive;
-		
-		intent.putExtra("lat", lat);
-		intent.putExtra("lng", lng);
 		
 		
 		startActivity(intent);
