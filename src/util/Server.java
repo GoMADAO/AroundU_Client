@@ -68,6 +68,20 @@ public class Server {
 		callGet(json, "User");
 	}
 	
+	
+	public void userUnBlock(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put("userid", Helper.USERID);
+			json.put("OP", "unblock");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		callGet(json, "User");
+	}
+	
+	
 	public void getUser(){
 		JSONObject json = new JSONObject();
 		try {
@@ -80,8 +94,8 @@ public class Server {
 		 String output = callGet(json, "User");
 		 try {
 			JSONObject rt= new JSONObject(output);
-			Helper.USERNAME=rt.getString("username");
-			Helper.PATH = rt.getString("photo");
+			Helper.isACTIVE = rt.getBoolean("isactive");
+			Helper.isBLOCK = rt.getBoolean("isblock");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

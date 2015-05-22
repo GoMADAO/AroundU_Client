@@ -1,11 +1,9 @@
 package util;
 
-import java.security.Provider;
 
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -95,9 +93,9 @@ public class GPSService extends Service{
 	    
 	   //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, listener);
 	    
-	    Criteria criteria = new Criteria(); 
-	    String provider = locationManager.getBestProvider(criteria, true); 
-	    Location devicelocation = locationManager.getLastKnownLocation(provider);
+//	    Criteria criteria = new Criteria(); 
+//	    String provider = locationManager.getBestProvider(criteria, true); 
+	    //Location devicelocation = locationManager.getLastKnownLocation(provider);
 	    Helper.lat = 40.8131995;
 	    Helper.lng = -122.084095;
 	    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
