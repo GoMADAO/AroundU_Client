@@ -8,6 +8,7 @@ public abstract class EventMSG {
 	public String text;
 	public String lat, lng;
 	public String timestamp;
+	public String userid;
 	
 	public EventMSG(JSONObject json) throws JSONException{
 		this.id = json.getString("id");
@@ -15,6 +16,7 @@ public abstract class EventMSG {
 		this.lat = json.getString("lat");
 		this.lng = json.getString("lon");
 		this.timestamp = json.getString("time");
+		this.userid = json.getString("userid");
 	}
 	
 	public EventMSG(String text, String abstr){
