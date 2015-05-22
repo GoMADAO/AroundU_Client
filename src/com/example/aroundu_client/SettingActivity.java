@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -149,25 +150,34 @@ public class SettingActivity extends Activity implements
 	}
 
 	private Bitmap getPhotoFromURL(String url){
-		Bitmap bm = null;
-		HttpURLConnection con = null;
+		Bitmap mIcon11 = null;
 		try {
-			URL link = new URL(url);
-			con = (HttpURLConnection) link.openConnection();
-			con.setDoInput(true);
-			InputStream is = con.getInputStream();
-			bm = BitmapFactory.decodeStream(is);
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			InputStream in = new java.net.URL(url).openStream();
+			mIcon11 = BitmapFactory.decodeStream(in);
+		} catch (Exception e) {
+			Log.e("Error", e.getMessage());
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally{
-			con.disconnect();
 		}
-		return bm;
+		return mIcon11;
+//		Bitmap bm = null;
+//		HttpURLConnection con = null;
+//		try {
+//			URL link = new URL(url);
+//			con = (HttpURLConnection) link.openConnection();
+//			con.setDoInput(true);
+//			InputStream is = con.getInputStream();
+//			bm = BitmapFactory.decodeStream(is);
+//
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally{
+//			con.disconnect();
+//		}
+//		return bm;
 	}
 	
 	
