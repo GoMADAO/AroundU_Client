@@ -92,7 +92,8 @@ public class Server {
 			e.printStackTrace();
 		}
 		 String output = callGet(json, "User");
-		 if(output==null ||output.equals(""))
+		 
+		 if(output.equals("{}"))
 			 return false;
 		 try {
 			JSONObject rt= new JSONObject(output);
