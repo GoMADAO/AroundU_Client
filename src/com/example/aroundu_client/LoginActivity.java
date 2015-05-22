@@ -3,6 +3,7 @@ package com.example.aroundu_client;
 import java.io.InputStream;
 
 import util.Helper;
+import util.Server;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -41,7 +42,7 @@ ConnectionCallbacks, OnConnectionFailedListener {
 	private static final String TAG = "LoginActivity";
 
 	// Profile pic image size in pixels
-	private static final int PROFILE_PIC_SIZE = 400;
+	private static final int PROFILE_PIC_SIZE = 600;
 
 	// Google client to interact with Google API
 	private GoogleApiClient mGoogleApiClient;
@@ -266,7 +267,12 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		Helper.USERNAME = userName;
 		Helper.PATH = userPhotoUrl;
 		
-		Toast.makeText(getBaseContext(), "id: "+userID+" name: "+userName+" photo: "+userPhotoUrl, Toast.LENGTH_LONG).show();
+		Server server = new Server();
+		if(!server.getUser()){
+			server.createUser();
+		}
+		
+		Toast.makeText(getBaseContext(), "Welcome! "+userName+"!", Toast.LENGTH_LONG).show();
 		
 		Intent intent = new Intent(this, FeedsActivity.class);
 		startActivity(intent);

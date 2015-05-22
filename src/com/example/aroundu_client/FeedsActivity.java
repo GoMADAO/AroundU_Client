@@ -130,11 +130,13 @@ public class FeedsActivity extends Activity implements
 		
 		events = new ArrayList<data.EventMSG>();
 		
-		for(Emergency emr:emrList){
-			if (emr!=null) events.add(emr);
-		}
-		for(Importance imp:impList){
-			if (imp!=null) events.add(imp);
+		if(!Helper.isBLOCK){
+			for(Emergency emr:emrList){
+				if (emr!=null) events.add(emr);
+			}
+			for(Importance imp:impList){
+				if (imp!=null) events.add(imp);
+			}
 		}
 		
 		listview = (ListView) findViewById(R.id.feedList);
@@ -148,11 +150,13 @@ public class FeedsActivity extends Activity implements
 				String curTopic = parent.getItemAtPosition(position).toString();
 				if(listview.getAdapter()!=null){
 					events.clear();
-					for(Emergency emr:emrList){
-						if (emr!=null) events.add(emr);
-					}
-					for(Importance imp:impList){
-						if (imp!=null) events.add(imp);
+					if(!Helper.isBLOCK){
+						for(Emergency emr:emrList){
+							if (emr!=null) events.add(emr);
+						}
+						for(Importance imp:impList){
+							if (imp!=null) events.add(imp);
+						}
 					}
 				}
 				if (curTopic.equals("All Topics")){

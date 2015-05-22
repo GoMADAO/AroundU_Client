@@ -93,22 +93,24 @@ public class feedAdapter extends ArrayAdapter{
 			case 1:
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_importance, null);
 				textView = (TextView) convertView.findViewById(R.id.text_importance);
+				timeText = (TextView) convertView.findViewById(R.id.text_time);
 				Button report = (Button) convertView.findViewById(R.id.button_report);
 				
 				report.setTag(importance);
 				
-				viewholder1 = new ViewHolder1(textView, report);
+				viewholder1 = new ViewHolder1(textView, timeText, report);
 				convertView.setTag(viewholder1);
 				break;
 			case 2:
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_emergency, null);
 				textView = (TextView) convertView.findViewById(R.id.text_emergency);
+				timeText = (TextView) convertView.findViewById(R.id.text_time);
 				report = (Button) convertView.findViewById(R.id.button_report);
 				
 				textView.setTag(emergency);
 				report.setTag(emergency);
 				
-				viewholder1 = new ViewHolder1(textView, report);
+				viewholder1 = new ViewHolder1(textView, timeText, report);
 				convertView.setTag(viewholder1);
 				break;
 			}
@@ -163,22 +165,42 @@ public class feedAdapter extends ArrayAdapter{
 			});
 			break;
 		case 1:
+			sendTime = importance.timestamp;
+			df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			timePass = "";
+			try {
+				Date send = df.parse(sendTime);
+				Date now = new Date();
+				long diff = (now.getTime()-send.getTime())/(1000*60);
+				timePass += diff+" mins ago";
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			viewholder1.text.setText(importance.abstr);
+			viewholder1.time.setText(timePass);
 			viewholder1.report.setOnClickListener(new OnClickListener(){
 				@Override
 				public void onClick(View v) {
 					Importance tmp = (Importance) v.getTag();
 					server4imp.report(tmp.id);
-					int reportTimes = Integer.parseInt(tmp.reportNUM)+1;
-					if(reportTimes>5){
-						events.remove(tmp);
-					}
 					mClickListener.onBtnClick();
 				}
 			});
 			break;
 		case 2:
+			sendTime = emergency.timestamp;
+			df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			timePass = "";
+			try {
+				Date send = df.parse(sendTime);
+				Date now = new Date();
+				long diff = (now.getTime()-send.getTime())/(1000*60);
+				timePass += diff+" mins ago";
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			viewholder1.text.setText(emergency.abstr);
+			viewholder1.time.setText(timePass);
 			viewholder1.text.setOnClickListener(new OnClickListener(){
 				@Override
 				public void onClick(View v) {
@@ -197,7 +219,7 @@ public class feedAdapter extends ArrayAdapter{
 				public void onClick(View v) {
 					Emergency tmp = (Emergency) v.getTag();
 					server4imp.report(tmp.id);
-					int reportTimes = Integer.parseInt(tmp.reportNUM)+1;
+					mClickListener.onBtnClick();
 				}
 			});
 			break;

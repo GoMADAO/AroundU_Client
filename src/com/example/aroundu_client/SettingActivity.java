@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import util.Helper;
+import util.Server;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -57,6 +58,8 @@ public class SettingActivity extends Activity implements
 	
 	private boolean creation = true;
 	
+	Server server = new Server();
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +93,14 @@ public class SettingActivity extends Activity implements
 					if(isChecked){
 					     System.out.println("Switch is currently ON");
 					     Helper.isBLOCK=true;
+					     server.userBlock();
 					     Toast.makeText(getApplicationContext()
 									, "Show importance and emergency"
 									, Toast.LENGTH_SHORT).show();
 					}else{
 					    	System.out.println("Switch is currently OFF");
 					    	Helper.isBLOCK=false;
+					    	server.userUnBlock();
 					    	Toast.makeText(getApplicationContext()
 									, "Block importance and emergency"
 									, Toast.LENGTH_SHORT).show();
