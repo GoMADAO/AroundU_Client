@@ -7,7 +7,7 @@ import data.EventMSG;
 import data.Importance;
 
 public class Server4Imp extends Server{
-	private String service ="Writer";
+	private String service ="write";
 	@Override
 	public void insert(EventMSG msg,String lati, String longi){
 JSONObject json = new JSONObject();

@@ -10,7 +10,7 @@ import data.Normal;
 
 public class Server4Normal extends Server{
 	
-	private String service = "Writer";
+	private String service = "write";
 	
 	@Override
 	public void insert(EventMSG msg, String lati, String longi){

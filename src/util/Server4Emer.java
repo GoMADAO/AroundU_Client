@@ -9,7 +9,7 @@ import data.EventMSG;
 
 
 public class Server4Emer extends Server{
-	private String service = "Writer";
+	private String service = "write";
 	@Override
 	public void insert(EventMSG msg,String lati, String longi){
 		JSONObject json = new JSONObject();
