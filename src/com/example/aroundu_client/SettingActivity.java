@@ -150,34 +150,34 @@ public class SettingActivity extends Activity implements
 	}
 
 	private Bitmap getPhotoFromURL(String url){
-		Bitmap mIcon11 = null;
-		try {
-			InputStream in = new java.net.URL(url).openStream();
-			mIcon11 = BitmapFactory.decodeStream(in);
-		} catch (Exception e) {
-			Log.e("Error", e.getMessage());
-			e.printStackTrace();
-		}
-		return mIcon11;
-//		Bitmap bm = null;
-//		HttpURLConnection con = null;
+//		Bitmap mIcon11 = null;
 //		try {
-//			URL link = new URL(url);
-//			con = (HttpURLConnection) link.openConnection();
-//			con.setDoInput(true);
-//			InputStream is = con.getInputStream();
-//			bm = BitmapFactory.decodeStream(is);
-//
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
+//			InputStream in = new java.net.URL(url).openStream();
+//			mIcon11 = BitmapFactory.decodeStream(in);
+//		} catch (Exception e) {
+//			Log.e("Error", e.getMessage());
 //			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally{
-//			con.disconnect();
 //		}
-//		return bm;
+//		return mIcon11;
+		Bitmap bm = null;
+		HttpURLConnection con = null;
+		try {
+			URL link = new URL(url);
+			con = (HttpURLConnection) link.openConnection();
+			con.setDoInput(true);
+			InputStream is = con.getInputStream();
+			bm = BitmapFactory.decodeStream(is);
+
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			con.disconnect();
+		}
+		return bm;
 	}
 	
 	

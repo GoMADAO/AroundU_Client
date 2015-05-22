@@ -2,6 +2,8 @@ package com.example.aroundu_client;
 
 import java.io.InputStream;
 
+import util.Helper;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -258,14 +260,15 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		String userID = userProfile[0];
 		String userName = userProfile[1];
 		String userPhotoUrl = userProfile[2];
-
-		// Update the UI after signin
-//		updateUI(true);
+		userPhotoUrl = userPhotoUrl.substring(0,userPhotoUrl.length() - 2) + PROFILE_PIC_SIZE;
+		
+		Helper.USERID = userID;
+		Helper.USERNAME = userName;
+		Helper.PATH = userPhotoUrl;
+		
+		Toast.makeText(getBaseContext(), "id: "+userID+" name: "+userName+" photo: "+userPhotoUrl, Toast.LENGTH_LONG).show();
 		
 		Intent intent = new Intent(this, FeedsActivity.class);
-		intent.putExtra("user_id", userID);
-		intent.putExtra("user_name", userName);
-		intent.putExtra("photo_url", userPhotoUrl);
 		startActivity(intent);
 		finish();
 		}

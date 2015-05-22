@@ -107,18 +107,6 @@ public class FeedsActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feeds);
 		
-		Intent intent = getIntent();
-		
-		String user_id = intent.getStringExtra("user_id");
-		String user_name = intent.getStringExtra("user_name");
-		String photo_url = intent.getStringExtra("photo_url");
-		
-		Helper.USERID = user_id;
-		Helper.USERNAME = user_name;
-		Helper.PATH = photo_url;
-		
-		Toast.makeText(getBaseContext(), "id: "+user_id+" name: "+user_name+" photo: "+photo_url, Toast.LENGTH_LONG).show();
-		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();

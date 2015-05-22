@@ -19,7 +19,6 @@ public final class Helper {
 	public static final int EMERGENCY = 2;
 	public static final int IMPORTANCE = 1;
 	
-
 	public static double lat = 0.0;
 	public static double lng = 0.0;
 	
