@@ -44,6 +44,52 @@ public class Server {
 		return result;
 	}
 	
+	public void createUser(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put("userid", Helper.USERID);
+			json.put("OP", "insert");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		callGet(json, "User");
+	}
+	
+	public void userBlock(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put("userid", Helper.USERID);
+			json.put("OP", "block");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		callGet(json, "User");
+	}
+	
+	public void getUser(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put("userid", Helper.USERID);
+			json.put("OP", "select");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 String output = callGet(json, "User");
+		 try {
+			JSONObject rt= new JSONObject(output);
+			Helper.USERNAME=rt.getString("username");
+			Helper.PATH = rt.getString("photo");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	}
+	
+	
 	protected static String callGet(JSONObject data, String service){
 		String result=null;
 		StringBuffer url =  new StringBuffer();
