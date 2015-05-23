@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -42,6 +44,7 @@ import android.widget.Toast;
 public class FeedsActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
 	
+	private SwipeRefreshLayout swipeContainer;
 	public static ListView listview;
 	public Spinner dropdown;
 	/**
@@ -152,6 +155,8 @@ public class FeedsActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feeds);
 		
+		swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+		
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
@@ -231,6 +236,16 @@ public class FeedsActivity extends Activity implements
 		});
 		
 		listview.setAdapter(feedadapter);
+		
+		swipeContainer.setOnRefreshListener(new OnRefreshListener(){
+			@Override
+			public void onRefresh() {
+				Intent intent = new Intent(FeedsActivity.this, FeedsActivity.class);
+				startActivity(intent);
+				finish();
+				swipeContainer.setRefreshing(false);
+			}
+		});
 	}
 
 	@Override
