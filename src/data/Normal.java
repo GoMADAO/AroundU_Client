@@ -8,6 +8,7 @@ import util.Helper;
 public class Normal extends EventMSG{
 	public String topic;
 	public String likeNum;
+	public String sentiment;
 	
 	
 	public Normal(JSONObject json ) throws JSONException {
@@ -15,6 +16,7 @@ public class Normal extends EventMSG{
 		this.topic = json.getString("topic");
 		this.likeNum = Integer.parseInt(json.getString("likes"))
 				-Integer.parseInt(json.getString("dislikes"))+"";
+		this.sentiment = json.getString("sentiment");
 		
 	}
 	public Normal(String text, String abstr) {

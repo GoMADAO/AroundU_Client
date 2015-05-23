@@ -31,8 +31,8 @@ public class GPSService extends Service{
 	            return;
 	        Helper.lat=location.getLatitude();
 	        Helper.lng=location.getLongitude();
-	        System.out.println(Helper.lat);
-	        System.out.println(Helper.lng);
+	        Log.i("Location lat:",""+Helper.lat);
+	        Log.i("Location lng:",""+Helper.lng);
 	    }
 
 	    @Override
@@ -99,7 +99,8 @@ public class GPSService extends Service{
 	    Helper.lat = 40.8131995;
 	    Helper.lng = -73.95992474;
 	    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-	            0, 0, listener);
+	            1000, 0.1f, listener);
+	    
 
 	}
 	
