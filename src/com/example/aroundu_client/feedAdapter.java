@@ -139,10 +139,13 @@ public class feedAdapter extends ArrayAdapter{
 			}
 			else{
 				sendTime = normal.timestamp;
+				System.out.println("original:"+sendTime);
 				df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				try {
 					Date send = df.parse(sendTime);
 					Date now = new Date();
+					System.out.println("send:"+send);
+					System.out.println("now:"+now);
 					long diff = (now.getTime()-send.getTime())/(1000*60);
 					timePass += diff+" mins ago";
 				} catch (ParseException e) {
