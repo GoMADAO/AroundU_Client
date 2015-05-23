@@ -36,9 +36,8 @@ public class NewNormalActivity extends Activity {
 				if(!msg.trim().isEmpty()){
 					Normal normal = new Normal(msg,null);
 					server.insert(normal,""+Helper.lat, ""+Helper.lng);
-				
+					Helper.cacheNormal.add(normal);
 					Toast.makeText(getBaseContext(), "New moment sent!", Toast.LENGTH_SHORT).show();
-		
 					Intent intent = new Intent(NewNormalActivity.this, FeedsActivity.class);
 					startActivity(intent);
 				

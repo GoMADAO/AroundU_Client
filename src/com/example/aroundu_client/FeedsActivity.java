@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,20 +77,64 @@ public class FeedsActivity extends Activity implements
 		dropdownList = new ArrayList<String>();
 		dropdownList.add("All Topics");
 		
-		if(nors.length()!=0){
-			for (int i=0;i<nors.length();i++)
-				norList.add(new Normal(nors.getJSONObject(i)));
+		for (int k=Helper.cacheNormal.size()-1; k>=0; k--){
+			Normal cache = Helper.cacheNormal.get(k);
+			System.out.println("cachee userid: "+cache.userid);
+			for (int i=0;i<nors.length();i++){
+				Normal curNorm = new Normal(nors.getJSONObject(i));
+				System.out.println(cache.text);
+				System.out.println(curNorm.text);
+				if(cache.userid.equals(Helper.USERID) && cache.text.equals(curNorm.text)){
+					Helper.cacheNormal.remove(cache);
+					break;
+				}
+			}
+		}
+		for (Normal cache: Helper.cacheNormal){
+			cache.isCached = true;
+			norList.add(cache);
+		}
+		for (int i=0;i<nors.length();i++){
+			Normal curNorm = new Normal(nors.getJSONObject(i));
+			norList.add(curNorm);
 		}
 		
-		if(imps.length()!=0){
-			for (int i=0;i<imps.length();i++)
-				impList.add(new Importance(imps.getJSONObject(i)));
-			
+		for (int k=Helper.cacheImportance.size()-1; k>=0; k--){
+			Importance cache = Helper.cacheImportance.get(k);
+			for (int i=0;i<imps.length();i++){
+				Importance curImp = new Importance(imps.getJSONObject(i));
+				if(cache.userid.equals(Helper.USERID) && cache.text.equals(curImp.text)){
+					Helper.cacheImportance.remove(cache);
+					break;
+				}
+			}
+		}
+		for (Importance cache: Helper.cacheImportance){
+			cache.isCached = true;
+			impList.add(cache);
+		}
+		for (int i=0;i<imps.length();i++){
+			Importance curImp = new Importance(imps.getJSONObject(i));
+			impList.add(curImp);
 		}
 		
-		if(emes.length()!=0){
-			for (int i=0;i<emes.length();i++)
-				emrList.add(new Emergency(emes.getJSONObject(i)));
+		for(int k=Helper.cacheEmergency.size()-1; k>=0; k--){
+			Emergency cache = Helper.cacheEmergency.get(k);
+			for (int i=0;i<emes.length();i++){
+				Emergency curEmer = new Emergency(emes.getJSONObject(i));
+				if(cache.userid.equals(Helper.USERID) && cache.text.equals(curEmer.text)){
+					Helper.cacheEmergency.remove(cache);
+					break;
+				}
+			}
+		}
+		for(Emergency cache: Helper.cacheEmergency){
+			cache.isCached = true;
+			emrList.add(cache);
+		}
+		for (int i=0;i<emes.length();i++){
+			Emergency curEmer = new Emergency(emes.getJSONObject(i));
+			emrList.add(curEmer);
 		}
 		
 		System.out.println("gmf:"+tops.length());
@@ -121,6 +166,7 @@ public class FeedsActivity extends Activity implements
 		try {
 			JSONObject json = new JSONObject(server.select(""+Helper.lat, ""+Helper.lng));
 			System.out.println(json.toString());
+			System.out.println(Helper.USERID);
 			save2List(json);
 			
 		} catch (JSONException e) {

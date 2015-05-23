@@ -3,12 +3,15 @@ package data;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import util.Helper;
+
 public abstract class EventMSG {
 	public String id;
 	public String text;
 	public String lat, lng;
 	public String timestamp;
 	public String userid;
+	public boolean isCached = false;
 	
 	public EventMSG(JSONObject json) throws JSONException{
 		this.id = json.getString("id");
@@ -21,6 +24,7 @@ public abstract class EventMSG {
 	
 	public EventMSG(String text, String abstr){
 		this.text = text;
+		this.userid = Helper.USERID;
 	}
 	
 	

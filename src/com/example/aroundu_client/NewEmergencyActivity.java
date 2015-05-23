@@ -59,6 +59,7 @@ public class NewEmergencyActivity extends Activity {
 					emer.mapOn = showMap;
 					server = new Server4Emer();
 					server.insert(emer,""+Helper.lat,""+Helper.lng);
+					Helper.cacheEmergency.add(emer);
 					Intent intent = new Intent(NewEmergencyActivity.this, FeedsActivity.class);
 					startActivity(intent);
 					finish();

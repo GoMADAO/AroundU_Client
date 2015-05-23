@@ -1,5 +1,11 @@
 package util;
 
+import java.util.ArrayList;
+
+import data.Emergency;
+import data.Importance;
+import data.Normal;
+
 
 
 public final class Helper {
@@ -8,6 +14,10 @@ public final class Helper {
 	public static String USERNAME="";
 	public static String PATH = "";
 	
+	//contents sent by the current user that has not been sent out yet.
+	public static ArrayList<Normal> cacheNormal = new ArrayList<Normal>();
+	public static ArrayList<Importance> cacheImportance = new ArrayList<Importance>();
+	public static ArrayList<Emergency> cacheEmergency = new ArrayList<Emergency>();
 	
 	public static int range = 10;
 	public static boolean isBLOCK = false;

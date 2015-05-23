@@ -128,100 +128,118 @@ public class feedAdapter extends ArrayAdapter{
 		}
 		switch (type){
 		case 0:
-			String sendTime = normal.timestamp;
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sendTime;
+			SimpleDateFormat df;
 			String timePass = "";
-			try {
-				Date send = df.parse(sendTime);
-				Date now = new Date();
-				long diff = (now.getTime()-send.getTime())/(1000*60);
-				timePass += diff+" mins ago";
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if (normal.isCached){
+				viewholder2.like.setEnabled(false);
+				viewholder2.dislike.setEnabled(false);
+				timePass += "Processing...";
 			}
-			
+			else{
+				sendTime = normal.timestamp;
+				df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				try {
+					Date send = df.parse(sendTime);
+					Date now = new Date();
+					long diff = (now.getTime()-send.getTime())/(1000*60);
+					timePass += diff+" mins ago";
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				viewholder2.likeCount.setText(normal.likeNum);
+				viewholder2.like.setTag(normal);
+				viewholder2.like.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						Normal tmp = (Normal) v.getTag();
+						server4norm.like(""+tmp.id);
+						tmp.likeNum = ""+(Integer.parseInt(tmp.likeNum)+1);
+						mClickListener.onBtnClick();
+					}		
+				});
+				viewholder2.dislike.setTag(normal);
+				viewholder2.dislike.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						Normal tmp = (Normal) v.getTag();
+						server4norm.dislike(""+tmp.id);
+						tmp.likeNum = ""+(Integer.parseInt(tmp.likeNum)-1);
+						mClickListener.onBtnClick();
+					}		
+				});
+			}
 			viewholder2.text.setText(normal.text);
 			viewholder2.time.setText(timePass);
-			viewholder2.likeCount.setText(normal.likeNum);
-			viewholder2.like.setTag(normal);
-			viewholder2.like.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					Normal tmp = (Normal) v.getTag();
-					server4norm.like(""+tmp.id);
-					tmp.likeNum = ""+(Integer.parseInt(tmp.likeNum)+1);
-					mClickListener.onBtnClick();
-				}		
-			});
-			viewholder2.dislike.setTag(normal);
-			viewholder2.dislike.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					Normal tmp = (Normal) v.getTag();
-					server4norm.dislike(""+tmp.id);
-					tmp.likeNum = ""+(Integer.parseInt(tmp.likeNum)-1);
-					mClickListener.onBtnClick();
-				}		
-			});
 			break;
 		case 1:
-			sendTime = importance.timestamp;
-			df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			timePass = "";
-			try {
-				Date send = df.parse(sendTime);
-				Date now = new Date();
-				long diff = (now.getTime()-send.getTime())/(1000*60);
-				timePass += diff+" mins ago";
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if(importance.isCached){
+				viewholder1.report.setEnabled(false);
+				timePass+="Processing...";
+			}else{
+				sendTime = importance.timestamp;
+				df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				try {
+					Date send = df.parse(sendTime);
+					Date now = new Date();
+					long diff = (now.getTime()-send.getTime())/(1000*60);
+					timePass += diff+" mins ago";
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				viewholder1.report.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						Importance tmp = (Importance) v.getTag();
+						server4imp.report(tmp.id);
+						mClickListener.onBtnClick();
+					}
+				});
 			}
 			viewholder1.text.setText(importance.abstr);
 			viewholder1.time.setText(timePass);
-			viewholder1.report.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					Importance tmp = (Importance) v.getTag();
-					server4imp.report(tmp.id);
-					mClickListener.onBtnClick();
-				}
-			});
 			break;
 		case 2:
-			sendTime = emergency.timestamp;
-			df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			timePass = "";
-			try {
-				Date send = df.parse(sendTime);
-				Date now = new Date();
-				long diff = (now.getTime()-send.getTime())/(1000*60);
-				timePass += diff+" mins ago";
-			} catch (ParseException e) {
-				e.printStackTrace();
+			if(emergency.isCached){
+				viewholder1.report.setEnabled(false);
+				timePass += "Processing...";
+			}else{
+				sendTime = emergency.timestamp;
+				df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				try {
+					Date send = df.parse(sendTime);
+					Date now = new Date();
+					long diff = (now.getTime()-send.getTime())/(1000*60);
+					timePass += diff+" mins ago";
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				viewholder1.text.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						Emergency tmp = (Emergency) v.getTag();
+						//here to go to emergency detail page, putExtra of the details
+						Intent intent = new Intent(activity, EmgDetailsActivity.class);
+						intent.putExtra("emer_details", tmp.text);
+						intent.putExtra("emer_mapon", tmp.mapOn);
+						intent.putExtra("emer_lat", tmp.lat);
+						intent.putExtra("emer_lng", tmp.lng);
+						activity.startActivity(intent);
+					}
+				});
+				viewholder1.report.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						Emergency tmp = (Emergency) v.getTag();
+						server4imp.report(tmp.id);
+						mClickListener.onBtnClick();
+					}
+				});
 			}
 			viewholder1.text.setText(emergency.abstr);
 			viewholder1.time.setText(timePass);
-			viewholder1.text.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					Emergency tmp = (Emergency) v.getTag();
-					//here to go to emergency detail page, putExtra of the details
-					Intent intent = new Intent(activity, EmgDetailsActivity.class);
-					intent.putExtra("emer_details", tmp.text);
-					intent.putExtra("emer_mapon", tmp.mapOn);
-					intent.putExtra("emer_lat", tmp.lat);
-					intent.putExtra("emer_lng", tmp.lng);
-					activity.startActivity(intent);
-				}
-			});
-			viewholder1.report.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					Emergency tmp = (Emergency) v.getTag();
-					server4imp.report(tmp.id);
-					mClickListener.onBtnClick();
-				}
-			});
 			break;
 		}
 		return convertView;

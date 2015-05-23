@@ -41,6 +41,7 @@ public class NewImportanceActivity extends Activity {
 					Importance imp = new Importance(detail,abstr);
 					server = new Server4Imp();
 					server.insert(imp,""+Helper.lat,""+Helper.lng);
+					Helper.cacheImportance.add(imp);
 					Intent intent = new Intent(NewImportanceActivity.this, FeedsActivity.class);
 					startActivity(intent);
 					finish();
