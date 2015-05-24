@@ -9,7 +9,7 @@
     
     <LinearLayout
         android:id="@+id/colorbuck"
-        android:layout_weight="0.1"
+        android:layout_weight="0.05"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:background="#3d292f"
@@ -18,12 +18,11 @@
             android:id="@+id/sentiment_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"/>
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_weight="0.75"
+        android:layout_weight="0.8"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:orientation="vertical">
