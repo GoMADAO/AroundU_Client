@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,7 +95,7 @@ public class feedAdapter extends ArrayAdapter{
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_importance, null);
 				textView = (TextView) convertView.findViewById(R.id.text_importance);
 				timeText = (TextView) convertView.findViewById(R.id.text_time);
-				Button report = (Button) convertView.findViewById(R.id.button_report);
+				ImageButton report = (ImageButton) convertView.findViewById(R.id.button_report);
 				
 				textView.setTag(importance);
 				report.setTag(importance);
@@ -106,7 +107,7 @@ public class feedAdapter extends ArrayAdapter{
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_emergency, null);
 				textView = (TextView) convertView.findViewById(R.id.text_emergency);
 				timeText = (TextView) convertView.findViewById(R.id.text_time);
-				report = (Button) convertView.findViewById(R.id.button_report);
+				report = (ImageButton) convertView.findViewById(R.id.button_report);
 				
 				textView.setTag(emergency);
 				report.setTag(emergency);
@@ -172,6 +173,15 @@ public class feedAdapter extends ArrayAdapter{
 						mClickListener.onBtnClick();
 					}		
 				});
+				if(normal.sentiment.equals("positive")){
+					
+				}
+				else if(normal.sentiment.equals("negative")){
+					
+				}
+				else if(normal.sentiment.equals("neutral")){
+					
+				}
 			}
 			viewholder2.text.setText(normal.text);
 			viewholder2.time.setText(timePass);
@@ -206,6 +216,7 @@ public class feedAdapter extends ArrayAdapter{
 					public void onClick(View v) {
 						Importance tmp = (Importance) v.getTag();
 						server4imp.report(tmp.id);
+						Toast.makeText(activity, "Report recorded!", Toast.LENGTH_SHORT).show();
 						mClickListener.onBtnClick();
 					}
 				});
@@ -219,6 +230,9 @@ public class feedAdapter extends ArrayAdapter{
 				viewholder1.report.setEnabled(false);
 				timePass += "Processing...";
 			}else{
+				if(Integer.parseInt(emergency.reportNUM)==1){
+					
+				}
 				sendTime = emergency.timestamp;
 				df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				try {
@@ -252,6 +266,7 @@ public class feedAdapter extends ArrayAdapter{
 					public void onClick(View v) {
 						Emergency tmp = (Emergency) v.getTag();
 						server4imp.report(tmp.id);
+						Toast.makeText(activity, "Report recorded!", Toast.LENGTH_SHORT).show();
 						mClickListener.onBtnClick();
 					}
 				});

@@ -3,36 +3,47 @@
     android:id = "@+id/row"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff000000"
+    android:background="#fd305b"
     android:weightSum="1"
     android:orientation="horizontal" >
     
     <LinearLayout
         android:layout_weight="0.85"
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
 	    android:orientation="vertical">
 	    <TextView
 	        android:id="@+id/text_emergency"
 	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
+	        android:layout_height="0dp"
 	        android:layout_gravity="center"
+	        android:layout_weight="0.8"
 	        android:textColor="@android:color/white"
+	        android:paddingLeft="14dp"
+	        android:paddingTop="8dp"
 	        android:textSize="20sp"/>
 	    <TextView
 	        android:id="@+id/text_time"
 	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
+	        android:layout_height="0dp"
 	        android:layout_gravity="center"
+	        android:layout_weight="0.2"
 	        android:textColor="#b1b1b1"
+	        android:paddingLeft="14dp"
+	        android:paddingTop="10dp"
+	        android:paddingBottom="4dp"
 	        android:textSize="16sp"/>
     </LinearLayout>
-    <Button
+
+    <ImageButton
         android:id="@+id/button_report"
+        android:background="@null"
+        android:contentDescription="@string/warningDesc"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:text="@string/button_report" 
-        android:textColor="@android:color/white"
-        android:layout_weight="0.15"/>
+        android:layout_weight="0.15"
+        android:src="@drawable/warning"
+        android:text="@string/button_report"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
