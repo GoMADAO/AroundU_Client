@@ -16,7 +16,7 @@ public class DetailActivity extends Activity {
 		
 		Intent intent = getIntent();
 		String detail = intent.getStringExtra("emer_details");
-		if (detail==null){
+		if(detail==null){
 			detail = intent.getStringExtra("imp_details");
 		}
 		

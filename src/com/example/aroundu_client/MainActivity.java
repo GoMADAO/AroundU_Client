@@ -28,61 +28,16 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
 	  
-	  
 	  StrictMode.ThreadPolicy policy = new StrictMode.
 			  ThreadPolicy.Builder().permitAll().build();
 			  StrictMode.setThreadPolicy(policy); 
 	  
-	  
 	  setContentView(R.layout.activity_main);
-	  System.out.println(Helper.getRange());
-	  Button login = (Button) findViewById(R.id.btn);
 	  
 	  startService(new Intent(this, GPSService.class));
-	  
-//	  System.out.println("lat:"+Helper.lat+" lng:"+Helper.lng);
-//	  Server server = new Server4Normal();
-//	  EventMSG msg= new Normal("first text", null);
-//	
-//	  server.insert(msg,"40.8438597", "-73.936510314");
-	
-	  login.setOnClickListener(new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			gotoFeeds(null);
-		}
-	});
-	}
-	public void gotoFeeds(View v){
-		Intent intent = new Intent(this, LoginActivity.class);
-		
-		//TODO check login
-		/**
-		 *  facebook login
-		 *  
-		 *  get user_id & user_name & isBlock & isActive & (lat,lng)
-		 */
-		System.out.println("lat:"+Helper.lat+" lng:"+Helper.lng);
-		//fake data
-//		String user_id = "yf2338";
-//		String user_name = "AlexandraVon";
-		boolean isBlock = false;
-		boolean isActive = true;
-		
-//		Server server = new Server();
-//		String result = server.select("40.8438597", "-73.9365103,14");
-//		if(result!=null)
-//			System.out.println(result);
-		
-//		Helper.USERID = "107929345784396818948";
-//		Helper.USERNAME = "Yuan Feng";
-		Helper.isBLOCK = isBlock;
-		Helper.isACTIVE = isActive;
-		
-		
-		startActivity(intent);
-		finish();
+	  Intent intent = new Intent(this, LoginActivity.class);
+	  startActivity(intent);
+	  finish();
 	}
 	
 	@Override

@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff000000"
+    android:background="#503a9f"
     tools:context="com.example.aroundu_client.FeedsActivity" >
 
     <!--
@@ -26,14 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="#503a9f">
         
 	        <TextView 
 	            android:id="@+id/topic_tip"
-	            android:text="@string/topicTip"
-	            android:textSize="18sp"
-	            android:textColor="#ffffff"
-	            android:layout_width="wrap_content"
+	            android:background="@drawable/topic"
+	            android:layout_width="40dp"
 	            android:layout_height="wrap_content"
 	            android:layout_gravity="center"
 	            android:paddingLeft="10dp"
@@ -45,7 +44,8 @@
 	        	android:layout_width="wrap_content"
 	        	android:layout_height="wrap_content"
 	        	android:popupBackground="#000"
-	        	android:padding="10dp"
+	        	android:paddingTop="10dp"
+	        	android:paddingBottom="10dp"
 	        	android:layout_gravity="center"/>
 	        
         </LinearLayout>

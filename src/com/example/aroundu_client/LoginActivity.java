@@ -58,10 +58,6 @@ ConnectionCallbacks, OnConnectionFailedListener {
 	private ConnectionResult mConnectionResult;
 
 	private SignInButton btnSignIn;
-	private Button btnSignOut, btnRevokeAccess;
-	private ImageView imgProfilePic;
-	private TextView txtName, txtEmail;
-	private LinearLayout llProfileLayout;
 	
 	
 	@Override
@@ -70,17 +66,9 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		setContentView(R.layout.activity_login);
 		
 		btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-		btnSignOut = (Button) findViewById(R.id.btn_sign_out);
-		btnRevokeAccess = (Button) findViewById(R.id.btn_revoke_access);
-		imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
-		txtName = (TextView) findViewById(R.id.txtName);
-		txtEmail = (TextView) findViewById(R.id.txtEmail);
-		llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 		
 		// Button click listeners
 		btnSignIn.setOnClickListener(this);
-		btnSignOut.setOnClickListener(this);
-		btnRevokeAccess.setOnClickListener(this);
 		
 		mGoogleApiClient = new GoogleApiClient.Builder(this)
 		.addConnectionCallbacks(this)
@@ -171,31 +159,6 @@ ConnectionCallbacks, OnConnectionFailedListener {
 			}
 		}
 	}
-
-	private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-		ImageView bmImage;
-
-		public LoadProfileImage(ImageView bmImage) {
-			this.bmImage = bmImage;
-		}
-
-		protected Bitmap doInBackground(String... urls) {
-			String urldisplay = urls[0];
-			Bitmap mIcon11 = null;
-			try {
-				InputStream in = new java.net.URL(urldisplay).openStream();
-				mIcon11 = BitmapFactory.decodeStream(in);
-			} catch (Exception e) {
-				Log.e("Error", e.getMessage());
-				e.printStackTrace();
-			}
-			return mIcon11;
-		}
-
-		protected void onPostExecute(Bitmap result) {
-			bmImage.setImageBitmap(result);
-		}
-	}
 	
 	private String[] getProfileInformation() {
 		try {
@@ -213,17 +176,6 @@ ConnectionCallbacks, OnConnectionFailedListener {
 				Log.e(TAG, "ID: "+userID+", Name: " + personName + ", plusProfile: "
 						+ personGooglePlusProfile + ", email: " + email
 						+ ", Image: " + personPhotoUrl);
-
-				txtName.setText(personName);
-				txtEmail.setText(email);
-
-				// by default the profile url gives 50x50 px image only
-				// we can replace the value with whatever dimension we want by
-				// replacing sz=X
-				personPhotoUrl = personPhotoUrl.substring(0,
-						personPhotoUrl.length() - 2)
-						+ PROFILE_PIC_SIZE;
-				new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);
 				
 				return loginProfile;
 			} else {
@@ -236,25 +188,10 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		return null;
 	}
 	
-	private void updateUI(boolean isSignedIn) {
-		if (isSignedIn) {
-			btnSignIn.setVisibility(View.GONE);
-			btnSignOut.setVisibility(View.VISIBLE);
-			btnRevokeAccess.setVisibility(View.VISIBLE);
-			llProfileLayout.setVisibility(View.VISIBLE);
-		} else {
-			btnSignIn.setVisibility(View.VISIBLE);
-			btnSignOut.setVisibility(View.GONE);
-			btnRevokeAccess.setVisibility(View.GONE);
-			llProfileLayout.setVisibility(View.GONE);
-		}
-	}
-	
 	@Override
 	public void onConnected(Bundle arg0) {
 		// TODO Auto-generated method stub
 		mSignInClicked = false;
-		Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
 
 		// Get user's information
 		String[] userProfile = getProfileInformation();
@@ -270,34 +207,32 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		Server server = new Server();
 		if(!server.getUser()){
 			server.createUser();
+			Intent intent = new Intent(this, FeedsActivity.class);
+			startActivity(intent);
+			finish();
+		}else if(!Helper.isACTIVE){
+			Toast.makeText(getBaseContext(), "Sorry, your account has been disactive!", Toast.LENGTH_LONG).show();
+			signOutFromGplus();
+			Helper.isACTIVE = true;
+		}else{
+			Toast.makeText(getBaseContext(), "Welcome! "+userName+"!", Toast.LENGTH_LONG).show();
+			
+			Intent intent = new Intent(this, FeedsActivity.class);
+			startActivity(intent);
+			finish();
 		}
-		
-		Toast.makeText(getBaseContext(), "Welcome! "+userName+"!", Toast.LENGTH_LONG).show();
-		
-		Intent intent = new Intent(this, FeedsActivity.class);
-		startActivity(intent);
-		finish();
 		}
 
 	@Override
 	public void onConnectionSuspended(int arg0) {
-		// TODO Auto-generated method stub
 		mGoogleApiClient.connect();
-		updateUI(false);
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_sign_in:
 			signInWithGplus();
-			break;
-		case R.id.btn_sign_out:
-			signOutFromGplus();
-			break;
-		case R.id.btn_revoke_access:
-			revokeGplusAccess();
 			break;
 		}
 	}
@@ -319,25 +254,6 @@ ConnectionCallbacks, OnConnectionFailedListener {
 			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
 			mGoogleApiClient.disconnect();
 			mGoogleApiClient.connect();
-			updateUI(false);
-		}
-	}
-	/**
-	 * Revoking access from google
-	 * */
-	private void revokeGplusAccess() {
-		if (mGoogleApiClient.isConnected()) {
-			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-			Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient)
-					.setResultCallback(new ResultCallback<Status>() {
-						@Override
-						public void onResult(Status arg0) {
-							Log.e(TAG, "User access revoked!");
-							mGoogleApiClient.connect();
-							updateUI(false);
-						}
-
-					});
 		}
 	}
 }

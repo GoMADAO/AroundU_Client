@@ -267,12 +267,6 @@ public class FeedsActivity extends Activity implements
 				System.out.println("Got 0");
 				break;
 			case 1:
-				System.out.println("Got 1");
-				i = new Intent(this, SettingActivity.class);
-				startActivity(i);
-				finish();
-				break;
-			case 2:
 				final String[] btnlist = new  String[] {"Moment", "Announcement", "Emergency" };
 				System.out.println("Got 2");
 				new  AlertDialog.Builder(this)  
@@ -281,7 +275,6 @@ public class FeedsActivity extends Activity implements
 						@Override
 						public void onClick(DialogInterface dialogue, int which) {
 							Intent intent = null;
-//							Toast.makeText(getBaseContext(), ""+which, Toast.LENGTH_LONG).show();
 							if (which==0){
 								intent = new Intent(FeedsActivity.this,NewNormalActivity.class);
 							}
@@ -295,6 +288,12 @@ public class FeedsActivity extends Activity implements
 						}
 				})
 				.show();  
+				break;
+			case 2:
+				System.out.println("Got 1");
+				i = new Intent(this, SettingActivity.class);
+				startActivity(i);
+				finish();
 				break;
 			}
 		}

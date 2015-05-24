@@ -121,7 +121,7 @@ public class SettingActivity extends Activity implements
 		myrange = (SeekBar) findViewById(R.id.range_seekbar);
 		myrange.setProgress(Helper.range);
 		rangeText = (TextView) findViewById(R.id.range_text);
-		rangeText.setText(myrange.getProgress()+"/"+myrange.getMax());
+		rangeText.setText(myrange.getProgress()+" Meters");
 		myrange.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			int progressChanged = 0;
 
@@ -140,10 +140,10 @@ public class SettingActivity extends Activity implements
 							, Toast.LENGTH_SHORT).show();
 					progressChanged = Helper.range;
 					seekBar.setProgress(progressChanged);
-					rangeText.setText(Helper.range+"/"+myrange.getMax());
+					rangeText.setText(Helper.range+" Meters");
 					
 				}else{
-					rangeText.setText(progressChanged+"/"+seekBar.getMax());
+					rangeText.setText(progressChanged+" Meters");
 					Helper.range = progressChanged;
 				}
 				
@@ -207,9 +207,6 @@ public class SettingActivity extends Activity implements
 				finish();
 				break;
 			case 1:
-				System.out.println("Got 1");
-				break;
-			case 2:
 				final String[] btnlist = new  String[] {"Moment", "Announcement", "Emergency" };
 				System.out.println("Got 2");
 				new  AlertDialog.Builder(this)  
@@ -225,6 +222,9 @@ public class SettingActivity extends Activity implements
 						}
 				})
 				.show();  
+				break;
+			case 2:
+				System.out.println("Got 1");
 				break;
 			}
 		}

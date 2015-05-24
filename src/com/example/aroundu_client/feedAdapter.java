@@ -177,16 +177,17 @@ public class feedAdapter extends ArrayAdapter{
 						mClickListener.onBtnClick();
 					}		
 				});
+				Drawable drawable = null;
 				if(normal.sentiment.equals("positive")){
-					Drawable drawable = activity.getResources().getDrawable(R.drawable.happy);
-					viewholder2.sentIcon.setBackground(drawable);
+					drawable = activity.getResources().getDrawable(R.drawable.laugh);
 				}
 				else if(normal.sentiment.equals("negative")){
-//					viewholder2.colorbuck.setBackgroundColor(Color.parseColor("#80899a"));
+					drawable = activity.getResources().getDrawable(R.drawable.sad);
 				}
 				else if(normal.sentiment.equals("neutral")){
-//					viewholder2.colorbuck.setBackgroundColor(Color.parseColor("#ceb646"));
+					drawable = activity.getResources().getDrawable(R.drawable.happy);
 				}
+				viewholder2.sentIcon.setBackground(drawable);
 			}
 			viewholder2.text.setText(normal.text);
 			viewholder2.time.setText(timePass);
