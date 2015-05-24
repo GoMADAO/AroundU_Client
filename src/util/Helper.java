@@ -23,8 +23,8 @@ public final class Helper {
 	public static boolean isBLOCK = false;
 	public static boolean isACTIVE = true;
 
-//	public static final String IP="http://AroundU-ppf3mgqp5p.elasticbeanstalk.com";
-	public static final String IP="http://d3l24bk5blqsii.cloudfront.net";
+	public static final String IP="http://AroundU-ppf3mgqp5p.elasticbeanstalk.com";
+//	public static final String IP="http://d3l24bk5blqsii.cloudfront.net";
 	
 	public static final int NORMAL = 0;
 	public static final int EMERGENCY = 2;

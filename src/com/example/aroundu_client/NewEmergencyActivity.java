@@ -39,7 +39,7 @@ public class NewEmergencyActivity extends Activity {
 
 			@Override
 			public void onCheckedChanged(CompoundButton button, boolean checked) {
-				showMap = !showMap;
+				showMap = checked;
 			}
 			
 		});

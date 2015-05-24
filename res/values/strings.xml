@@ -9,6 +9,8 @@
     <string name="button_dislike">Dislike</string>
     <string name="norm_input">Type your moment...</string>
     <string name="warningDesc">warning button</string>
+    <string name="likeDesc">like button</string>
+    <string name="dislikeDesc">dislike button</string>
     <string name="topicTip">Moment Topics:</string>
     <string name="title_activity_feeds">FeedsActivity</string>
     <string name="title_section1">What\'s Up</string>
