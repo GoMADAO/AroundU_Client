@@ -21,7 +21,7 @@ public class Server4Emer extends Server{
 			inner.put("type", "emergency");
 			inner.put("abstract", e.abstr);
 			inner.put("text", e.text);
-			inner.put("map", (e.mapOn)?1:0);
+			inner.put("map", (e.mapOn)?"1":"0");
 			inner.put("lat", lati);
 			inner.put("lng", longi);
 			inner.put("userid", Helper.USERID);

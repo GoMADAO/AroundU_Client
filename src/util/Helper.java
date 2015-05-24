@@ -34,6 +34,6 @@ public final class Helper {
 	public static double lng = 0.0;
 	
 	public static float getRange(){
-		return (float)range/1000;
+		return (float)range/500;
 	}
 }

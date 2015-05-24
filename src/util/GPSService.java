@@ -96,8 +96,8 @@ public class GPSService extends Service{
 //	    Criteria criteria = new Criteria(); 
 //	    String provider = locationManager.getBestProvider(criteria, true); 
 	    //Location devicelocation = locationManager.getLastKnownLocation(provider);
-	    Helper.lat = 40.8131995;
-	    Helper.lng = -73.95992474;
+	    Helper.lat = 40.8093797;
+	    Helper.lng = -73.9599676;
 	    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 	            1000, 0.1f, listener);
 	    

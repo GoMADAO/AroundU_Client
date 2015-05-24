@@ -24,6 +24,7 @@ public class NewEmergencyActivity extends Activity {
 	Server4Emer server = null;
 	boolean showMap = false;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class NewEmergencyActivity extends Activity {
 		EditText detail = (EditText) findViewById(R.id.emer_text_input);
 		Switch map_on = (Switch) findViewById(R.id.map_on_turn);
 		Button send_btn = (Button) findViewById(R.id.emer_send_btn);
+	
 		
 		map_on.setChecked(showMap);//default: hide location
 		map_on.setOnCheckedChangeListener(new OnCheckedChangeListener(){
