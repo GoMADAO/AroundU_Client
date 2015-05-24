@@ -28,7 +28,7 @@
 	        android:layout_height="0dp"
 	        android:layout_gravity="center"
 	        android:layout_weight="0.2"
-	        android:textColor="#b1b1b1"
+	        android:textColor="#d7d6d6"
 	        android:paddingLeft="14dp"
 	        android:paddingTop="10dp"
 	        android:paddingBottom="4dp"

@@ -15,6 +15,8 @@ import data.Importance;
 import data.Normal;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,15 +82,16 @@ public class feedAdapter extends ArrayAdapter{
 			switch (type) {
 			case 0:
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.feed_list_layout_normal, null);
+				TextView sentIcon = (TextView) convertView.findViewById(R.id.sentiment_icon);
 				TextView textView = (TextView) convertView.findViewById(R.id.text_normal);
 				TextView timeText = (TextView) convertView.findViewById(R.id.text_time); 
-				Button button_like = (Button) convertView.findViewById(R.id.button_like);
+				ImageButton button_like = (ImageButton) convertView.findViewById(R.id.button_like);
 				TextView likeCount = (TextView) convertView.findViewById(R.id.likeCount);
-				Button button_dislike = (Button) convertView.findViewById(R.id.button_dislike);
+				ImageButton button_dislike = (ImageButton) convertView.findViewById(R.id.button_dislike);
 				
 				button_like.setTag(normal);
 				button_dislike.setTag(normal);
-				viewholder2 = new ViewHolder2(textView, timeText, button_like, likeCount, button_dislike);
+				viewholder2 = new ViewHolder2(sentIcon, textView, timeText, button_like, likeCount, button_dislike);
 				convertView.setTag(viewholder2);
 				
 				break;
@@ -174,13 +178,14 @@ public class feedAdapter extends ArrayAdapter{
 					}		
 				});
 				if(normal.sentiment.equals("positive")){
-					
+					Drawable drawable = activity.getResources().getDrawable(R.drawable.happy);
+					viewholder2.sentIcon.setBackground(drawable);
 				}
 				else if(normal.sentiment.equals("negative")){
-					
+//					viewholder2.colorbuck.setBackgroundColor(Color.parseColor("#80899a"));
 				}
 				else if(normal.sentiment.equals("neutral")){
-					
+//					viewholder2.colorbuck.setBackgroundColor(Color.parseColor("#ceb646"));
 				}
 			}
 			viewholder2.text.setText(normal.text);
@@ -230,9 +235,6 @@ public class feedAdapter extends ArrayAdapter{
 				viewholder1.report.setEnabled(false);
 				timePass += "Processing...";
 			}else{
-				if(Integer.parseInt(emergency.reportNUM)==1){
-					
-				}
 				sendTime = emergency.timestamp;
 				df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				try {
@@ -251,6 +253,7 @@ public class feedAdapter extends ArrayAdapter{
 						Intent intent = null;
 						if (tmp.mapOn){
 							intent = new Intent(activity, EmgDetailsActivity.class);
+							intent.putExtra("emer_abstract", tmp.abstr);
 							intent.putExtra("emer_details", tmp.text);
 							intent.putExtra("emer_lat", tmp.lat);
 							intent.putExtra("emer_lng", tmp.lng);

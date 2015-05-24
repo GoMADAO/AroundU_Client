@@ -3,7 +3,7 @@
     android:id = "@+id/row"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff000000"
+    android:background="#ff8d21"
     android:weightSum="1"
     android:orientation="horizontal" >
     
@@ -28,7 +28,7 @@
 	        android:layout_height="0dp"
 	        android:layout_gravity="center"
 	        android:layout_weight="0.2"
-	        android:textColor="#b1b1b1"
+	        android:textColor="#d7d6d6"
 	        android:paddingLeft="14dp"
 	        android:paddingTop="10dp"
 	        android:paddingBottom="4dp"

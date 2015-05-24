@@ -75,8 +75,8 @@ public class MainActivity extends Activity {
 //		if(result!=null)
 //			System.out.println(result);
 		
-//		Helper.USERID = user_id;
-//		Helper.USERNAME = user_name;
+//		Helper.USERID = "107929345784396818948";
+//		Helper.USERNAME = "Yuan Feng";
 		Helper.isBLOCK = isBlock;
 		Helper.isACTIVE = isActive;
 		
