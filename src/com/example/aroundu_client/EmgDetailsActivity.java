@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class EmgDetailsActivity extends FragmentActivity implements OnMapReadyCa
 	private String detail;
 	private Double lat;
 	private Double lng;
+	private String abstr;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class EmgDetailsActivity extends FragmentActivity implements OnMapReadyCa
 		detail = intent.getStringExtra("emer_details");
 		lat = Double.parseDouble(intent.getStringExtra("emer_lat"));
 		lng = Double.parseDouble(intent.getStringExtra("emer_lng"));
+		abstr = intent.getStringExtra("emer_abstract");
+		
 		
 		TextView text = (TextView) findViewById(R.id.emergency_detial_text);
 		text.setText(detail);
@@ -74,7 +78,7 @@ public class EmgDetailsActivity extends FragmentActivity implements OnMapReadyCa
 		
 		float[] results = new float[1];
 		Location.distanceBetween(Helper.lat, Helper.lng, lat, lng, results);
-		
+		Log.e("get distance",results+"");
 		
 		googleMap.addMarker(new MarkerOptions()
 					.position(new LatLng
@@ -88,8 +92,8 @@ public class EmgDetailsActivity extends FragmentActivity implements OnMapReadyCa
 					.position(new LatLng 
 								(lat, lng)
 							)
-					.title("Marker")
-					.snippet(results+"miles to you!")
+					.title(abstr)
+					.snippet(results[0]+" meters to you!")
 					);
 		e_marker.showInfoWindow();
 	}
