@@ -4,12 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="@drawable/cover" >
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_sign_in"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginBottom="20dp"/>
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="380dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"/>
 
 </LinearLayout>

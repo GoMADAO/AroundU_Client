@@ -45,7 +45,7 @@ ConnectionCallbacks, OnConnectionFailedListener {
 	private static final int PROFILE_PIC_SIZE = 600;
 
 	// Google client to interact with Google API
-	private GoogleApiClient mGoogleApiClient;
+	private static GoogleApiClient mGoogleApiClient;
 
 	/**
 	 * A flag indicating that a PendingIntent is in progress and prevents us
@@ -254,6 +254,21 @@ ConnectionCallbacks, OnConnectionFailedListener {
 			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
 			mGoogleApiClient.disconnect();
 			mGoogleApiClient.connect();
+		}
+	}
+	
+	public static void revokeGplusAccess() {
+		if (mGoogleApiClient.isConnected()) {
+			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+			Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient)
+					.setResultCallback(new ResultCallback<Status>() {
+						@Override
+						public void onResult(Status arg0) {
+							Log.e(TAG, "User access revoked!");
+							mGoogleApiClient.connect();
+						}
+
+					});
 		}
 	}
 }

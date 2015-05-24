@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.plus.Plus;
+
 import data.Emergency;
 import data.Importance;
 import data.Normal;
@@ -295,6 +297,10 @@ public class FeedsActivity extends Activity implements
 				startActivity(i);
 				finish();
 				break;
+			case 3:
+				android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+				break;
 			}
 		}
 	}
@@ -309,6 +315,9 @@ public class FeedsActivity extends Activity implements
 			break;
 		case 3:
 			mTitle = getString(R.string.title_section3);
+			break;
+		case 4:
+			mTitle = getString(R.string.title_section4);
 			break;
 		}
 	}

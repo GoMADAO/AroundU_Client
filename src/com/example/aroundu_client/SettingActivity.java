@@ -29,6 +29,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Switch;
@@ -60,7 +61,6 @@ public class SettingActivity extends Activity implements
 	
 	Server server = new Server();
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,6 +74,7 @@ public class SettingActivity extends Activity implements
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
+		onNavigationDrawerItemSelected(2);
 		
 		username = (TextView) findViewById(R.id.user_name);
 		username.setText(Helper.USERNAME);
@@ -155,15 +156,6 @@ public class SettingActivity extends Activity implements
 	}
 
 	private Bitmap getPhotoFromURL(String url){
-//		Bitmap mIcon11 = null;
-//		try {
-//			InputStream in = new java.net.URL(url).openStream();
-//			mIcon11 = BitmapFactory.decodeStream(in);
-//		} catch (Exception e) {
-//			Log.e("Error", e.getMessage());
-//			e.printStackTrace();
-//		}
-//		return mIcon11;
 		Bitmap bm = null;
 		HttpURLConnection con = null;
 		try {
@@ -218,6 +210,12 @@ public class SettingActivity extends Activity implements
 							if (which==0){
 								intent = new Intent(SettingActivity.this,NewNormalActivity.class);
 							}
+							else if(which==1){
+								intent = new Intent(SettingActivity.this,NewImportanceActivity.class);
+							}
+							else if (which==2){
+								intent = new Intent(SettingActivity.this,NewEmergencyActivity.class);
+							}
 							startActivity(intent);
 						}
 				})
@@ -225,6 +223,10 @@ public class SettingActivity extends Activity implements
 				break;
 			case 2:
 				System.out.println("Got 1");
+				break;
+			case 3:
+				android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
 				break;
 			}
 		}
@@ -242,6 +244,9 @@ public class SettingActivity extends Activity implements
 			break;
 		case 3:
 			mTitle = getString(R.string.title_section3);
+			break;
+		case 4:
+			mTitle = getString(R.string.title_section4);
 			break;
 		}
 	}
