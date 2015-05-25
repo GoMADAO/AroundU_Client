@@ -45,7 +45,7 @@ ConnectionCallbacks, OnConnectionFailedListener {
 	private static final int PROFILE_PIC_SIZE = 600;
 
 	// Google client to interact with Google API
-	private static GoogleApiClient mGoogleApiClient;
+	private GoogleApiClient mGoogleApiClient;
 
 	/**
 	 * A flag indicating that a PendingIntent is in progress and prevents us
@@ -257,7 +257,7 @@ ConnectionCallbacks, OnConnectionFailedListener {
 		}
 	}
 	
-	public static void revokeGplusAccess() {
+	private void revokeGplusAccess() {
 		if (mGoogleApiClient.isConnected()) {
 			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
 			Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient)

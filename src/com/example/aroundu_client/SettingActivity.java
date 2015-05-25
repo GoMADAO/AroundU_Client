@@ -95,16 +95,10 @@ public class SettingActivity extends Activity implements
 					     System.out.println("Switch is currently ON");
 					     Helper.isBLOCK=true;
 					     server.userBlock();
-					     Toast.makeText(getApplicationContext()
-									, "Show importance and emergency"
-									, Toast.LENGTH_SHORT).show();
 					}else{
 					    	System.out.println("Switch is currently OFF");
 					    	Helper.isBLOCK=false;
 					    	server.userUnBlock();
-					    	Toast.makeText(getApplicationContext()
-									, "Block importance and emergency"
-									, Toast.LENGTH_SHORT).show();
 					}
 
 				}
@@ -122,7 +116,7 @@ public class SettingActivity extends Activity implements
 		myrange = (SeekBar) findViewById(R.id.range_seekbar);
 		myrange.setProgress(Helper.range);
 		rangeText = (TextView) findViewById(R.id.range_text);
-		rangeText.setText(myrange.getProgress()+" Meters");
+		rangeText.setText(myrange.getProgress()+" Scale");
 		myrange.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			int progressChanged = 0;
 
@@ -137,14 +131,14 @@ public class SettingActivity extends Activity implements
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				if (progressChanged ==0){
 					Toast.makeText(getApplicationContext()
-							, "You don't want see anything? T_T"
+							, "You don't want to see anything? T_T"
 							, Toast.LENGTH_SHORT).show();
 					progressChanged = Helper.range;
 					seekBar.setProgress(progressChanged);
-					rangeText.setText(Helper.range+" Meters");
+					rangeText.setText(Helper.range+" Scale");
 					
 				}else{
-					rangeText.setText(progressChanged+" Meters");
+					rangeText.setText(progressChanged+" Scale");
 					Helper.range = progressChanged;
 				}
 				
